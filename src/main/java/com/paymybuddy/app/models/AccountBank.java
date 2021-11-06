@@ -16,28 +16,86 @@ public class AccountBank {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="name_bank")
-	private String nameBank;
+	@Column(name="name",nullable=false)
+	private String name;
 	
-	@Column(name="iban_bank")
-	private String ibanBank;
+	@Column(name="iban",nullable=false)
+	private String iban;
+	
+
+	@Column(name="address")
+	private String address;
+	
+	@Column(name="city")
+	private String city;
+	
+	@Column(name="zip")
+	private int zip;
+	
 	
 	public int getId() {
-		return id;
-	}
+		return id;	
+		}
 
 	
-	public String getNameBank() {
-		return nameBank;
+	public String getName() {
+		return name;
 	}
-	public void setNameBank(String nameBank) {
-		this.nameBank = nameBank;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getIbanBank() {
-		return ibanBank;
+	public String getIban() {
+		return iban;
 	}
-	public void setIbanBank(String ibanBank) {
-		this.ibanBank = ibanBank;
+	public void setIban(String iban) {
+		this.iban = iban;
+	}
+	
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	/**
+	 * @return the zip
+	 */
+	public int getZip() {
+		return zip;
+	}
+
+
+	/**
+	 * @param zip the zip to set
+	 */
+	public void setZip(int zip) {
+		this.zip = zip;
 	}
 
 

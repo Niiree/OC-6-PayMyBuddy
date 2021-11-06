@@ -1,18 +1,23 @@
 package com.paymybuddy.app.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
 public class User {
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +31,7 @@ public class User {
 	private String lastName;
 	
 	@Column(name="balance")
-	private float balance;
+	private float solde;
 	
 	@Column(name="date_creat")
 	private Date date_creation;
@@ -36,8 +41,14 @@ public class User {
 	
 	@Column(name="password")
 	private String Password;
-
 	
+	@Column(name="statut_Active")
+	private Boolean statut_active;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name="id")
+	private List<AccountBank> accountBanks = new ArrayList<>();
 	
 	public int getId() {
 		return id;
@@ -61,11 +72,11 @@ public class User {
 	}
 
 	public float getBalance() {
-		return balance;
+		return solde;
 	}
 
-	public void setBalance(float balance) {
-		this.balance = balance;
+	public void setSolde(float solde) {
+		this.solde = solde;
 	}
 
 	public Date getDate_creation() {
@@ -90,6 +101,22 @@ public class User {
 
 	public void setPassword(String password) {
 		Password = password;
+	}
+
+
+	/**
+	 * @return the statut_active
+	 */
+	public Boolean getStatut_active() {
+		return statut_active;
+	}
+
+
+	/**
+	 * @param statut_active the statut_active to set
+	 */
+	public void setStatut_active(Boolean statut_active) {
+		this.statut_active = statut_active;
 	}
 
 

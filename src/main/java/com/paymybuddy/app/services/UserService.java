@@ -11,5 +11,6 @@ import com.paymybuddy.app.repository.UserRepository;
 @Service
 public class UserService {
 	
+	
 
 }
