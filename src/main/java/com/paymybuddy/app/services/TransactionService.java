@@ -28,9 +28,13 @@ public class TransactionService {
 		return transactionRepository.findAll();
 	}
 	
-	public Optional<Transaction> findById() {
-		
-		return transactionRepository.findById(1);
+	public Transaction findById(int id) {
+		 Optional<Transaction> optional = transactionRepository.findById(id);
+		 if(optional.isPresent()) {
+			 return optional.get();
+		 }else {
+			 throw new RuntimeException("Transaction not found for id "+id);
+		 }
 	}
 	
 	@Transactional
