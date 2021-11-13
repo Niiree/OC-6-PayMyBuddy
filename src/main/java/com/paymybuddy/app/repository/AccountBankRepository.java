@@ -11,6 +11,8 @@ public interface AccountBankRepository extends CrudRepository<AccountBank, Integ
 	
 	
 	AccountBank findByIban(String iban);
+	
+	
 
 
 }
