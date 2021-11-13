@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    th:fragment="main-fragment (title, otherStaticResources, header, nav, mainContent, footer)">
+<head>
+<meta charset="UTF-8" />
+<title th:replace="${title}">Page 1 Title</title>
+<link rel="stylesheet" type="text/css" th:href="@{/index.css}" href="../static/index.css"/>
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}" href="../static/materialize.css"/>
+<!-- Other javascript, css source files -->
+<th:block th:replace="${otherStaticResources} ?: ~{}"></th:block>
+</head>
+<body>    
+  <nav>
+    <div class="nav-wrapper white ">
+      <a  href="#" class="brand-logo #00897b teal darken-1">PayMyBuddy</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down black">
+        <li><a href="none.html">Home</a></li>
+        <li><a href="none.html">Transfer</a></li>
+        <li><a href="none.html">Profil</a></li>
+        <li><a href="none.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+    <div class="row">
+      <div class="col s4">1</div>
+      <div class="col s4">2</div>
+      <div class="col s4">3</div>
+    </div>
+
+
+
+
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+              </div>
+              <div class="col l4 offset-l2 s12">
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            </div>
+          </div>
+        </footer>
+</body>
+</html>
