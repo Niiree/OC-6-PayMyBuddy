@@ -1,5 +1,6 @@
 package com.paymybuddy.app.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -25,10 +26,10 @@ public class Transaction {
 	private int id;
 	
 	@OneToOne
-	private User sender;
+	private User emitter;
 	
 	@OneToOne
-	private User recipient;
+	private User receiver;
 	
 	@Column(name="balance")
 	private float balance;
@@ -37,10 +38,10 @@ public class Transaction {
 	private boolean statut_transaction;
 	
 	@Column(name="date_transaction")
-	private Date date_transaction;
+	private LocalDate date_transaction;
 	
 	@Column(name="libelle_perso")
-	private String lieblle_perso;
+	private String libelle_perso;
 
 
 	/**
@@ -62,32 +63,32 @@ public class Transaction {
 	/**
 	 * @return the sender
 	 */
-	public User getSender() {
-		return sender;
+	public User getEmitter() {
+		return emitter;
 	}
 
 
 	/**
 	 * @param sender the sender to set
 	 */
-	public void setSender(User sender) {
-		this.sender = sender;
+	public void setEmitter(User emitter) {
+		this.emitter = emitter;
 	}
 
 
 	/**
 	 * @return the recipient
 	 */
-	public User getRecipient() {
-		return recipient;
+	public User getReceiver() {
+		return receiver;
 	}
 
 
 	/**
 	 * @param recipient the recipient to set
 	 */
-	public void setRecipient(User recipient) {
-		this.recipient = recipient;
+	public void setReceiver(User receiver) {
+		this.receiver = receiver;
 	}
 
 
@@ -126,35 +127,35 @@ public class Transaction {
 	/**
 	 * @return the date_transaction
 	 */
-	public Date getDate_transaction() {
+	public LocalDate getDate_transaction() {
 		return date_transaction;
 	}
 
 
 	/**
-	 * @param date_transaction the date_transaction to set
+	 * @param localDate the date_transaction to set
 	 */
-	public void setDate_transaction(Date date_transaction) {
-		this.date_transaction = date_transaction;
+	public void setDate_transaction(LocalDate localDate) {
+		this.date_transaction = localDate;
 	}
 
 
 	/**
-	 * @return the lieblle_perso
+	 * @return the libelle_perso
 	 */
-	public String getLieblle_perso() {
-		return lieblle_perso;
+	public String getLibelle_perso() {
+		return libelle_perso;
 	}
 
 
 	/**
-	 * @param lieblle_perso the lieblle_perso to set
+	 * @param libelle_perso the lieblle_perso to set
 	 */
-	public void setLieblle_perso(String lieblle_perso) {
-		this.lieblle_perso = lieblle_perso;
+	public void setLibelle_perso(String libelle_perso) {
+		this.libelle_perso = libelle_perso;
 	}
 	
-
+	
 	
 
 	

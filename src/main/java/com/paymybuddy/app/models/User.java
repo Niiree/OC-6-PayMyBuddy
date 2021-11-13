@@ -31,7 +31,7 @@ public class User {
 	private String lastName;
 	
 	@Column(name="balance")
-	private float solde;
+	private float balance;
 	
 	@Column(name="date_creat")
 	private Date date_creation;
@@ -72,11 +72,11 @@ public class User {
 	}
 
 	public float getBalance() {
-		return solde;
+		return balance;
 	}
 
-	public void setSolde(float solde) {
-		this.solde = solde;
+	public void setBalance(float balance) {
+		this.balance = balance;
 	}
 
 	public Date getDate_creation() {
