@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Une page</title>
+  </head>
+  <body>
+  
+    <tbody>
+    <tr data-th-each="transaction : ${ transactions }">
+      <td data-th-text="${ transaction.id }"></td>
+      <td data-th-text="${ transaction.libelle_perso }"></td>
+      <td data-th-text="${ transaction.balance }"></td>
+    </tr>
+  </body>
+</html>
