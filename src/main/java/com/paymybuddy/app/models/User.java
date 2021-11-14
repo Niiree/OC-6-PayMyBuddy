@@ -1,5 +1,6 @@
 package com.paymybuddy.app.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,7 @@ public class User {
 	private float balance;
 	
 	@Column(name="date_creat")
-	private Date date_creation;
+	private LocalDate date_creation;
 	
 	@Column(name="email")
 	private String email;
@@ -45,10 +46,6 @@ public class User {
 	@Column(name="statut_Active")
 	private Boolean statut_active;
 	
-	
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinColumn(name="id")
-	private List<AccountBank> accountBanks = new ArrayList<>();
 	
 	public int getId() {
 		return id;
@@ -79,12 +76,12 @@ public class User {
 		this.balance = balance;
 	}
 
-	public Date getDate_creation() {
+	public LocalDate getDate_creation() {
 		return date_creation;
 	}
 
-	public void setDate_creation(Date date_creation) {
-		this.date_creation = date_creation;
+	public void setDate_creation(LocalDate localDate) {
+		this.date_creation = localDate;
 	}
 
 	public String getEmail() {
