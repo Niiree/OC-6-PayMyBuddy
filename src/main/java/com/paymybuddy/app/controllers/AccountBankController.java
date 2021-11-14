@@ -14,22 +14,21 @@ import com.paymybuddy.app.repository.AccountBankRepository;
 
 @Controller
 public class AccountBankController {
-
 	
 	@Autowired
-	private AccountBankRepository acb;
+	private AccountBankRepository accountBankRepository;
 	
 	
-    @GetMapping("/accountBank")
-    public String friendForm(Model model) {
-        model.addAttribute("personForm", new AccountBank());
-        return "NewFile";
+	@GetMapping("/accountBank")
+    public String accountBankForm(Model model) {
+        model.addAttribute("accountBankForm", new AccountBank());
+        return "createAccountBank";
     }
 
     @PostMapping("/accountBank")
     public String submissionResult(@ModelAttribute("personForm") AccountBank accountBank) {
-    	acb.save(accountBank);//temporaire test TODO
-        return "result";
+    	accountBankRepository.save(accountBank);
+        return "index";
     }
 	
 	
