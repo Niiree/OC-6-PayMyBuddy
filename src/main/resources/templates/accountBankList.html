@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Loop</title>
+    <style>table th, table td {padding: 5px;}</style>
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}" href="../../static/main.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}" href="../../static/materialize.css" />
+</head>
+<body>
+	<div id="transfer-nav"	th:insert="~{/fragments/app-fragments :: navbar}">Nav</div>
+    <h1>th:each</h1>
+    
+    <div id="transfer-main-content">
+	</div>
+    <table border="1">
+        <tr>
+          <th>iban</th>
+          <th>zip</th>
+        </tr>
+        <tr th:each="account : ${accounts}">
+          <td th:utext="${account.iban}">IBAN</td>
+          <td th:utext="${account.zip}">ZIP</td>
+        </tr>
+    </table>
+</body>
+</html>

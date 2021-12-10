@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Home</title>
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+	href="../../static/main.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
+	href="../../static/materialize.css" />
+</head>
+<body>
+<div id="home-nav"
+		th:insert="~{/fragments/app-fragments :: navbar}">Nav</div>
+	<div id="home-main-content">
+		<h2>Homepage</h2>
+		<div>Content of Home Page</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Transfer</title>
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+	href="../../static/main.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
+	href="../../static/materialize.css" />
+<th:block id="transfer-static-resources">
+</th:block>
+</head>
+<body>
+	<div id="transfer-nav"	th:insert="~{/fragments/app-fragments :: navbar}">Nav</div>
+	<div class="nav-wrapper #e0e0e0 grey lighten-2">
+		<a href="#!" class="breadcrumb">Home</a> <a href="#!"
+			class="breadcrumb">transfer</a>
+	</div>
+	<div id="transfer-main-content">
+		<h2>Transaction</h2>
+		<div>Content</div>
+	</div>
+	<footer id="transfert-footer"
+		th:insert="~{/fragments/app-fragments :: copyright}"></footer>
+
+</body>
+</html>

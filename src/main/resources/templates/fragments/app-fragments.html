@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>App Fragments</title>
+</head>
+<body>
+	<nav th:fragment="navbar">
+		<div class="nav-wrapper white ">
+			<a th:href="@{/}" class="brand-logo #00897b teal darken-1">PayMyBuddy</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down black">
+				<li><a th:href="@{/}">Home</a></li>
+				<li><a th:href="@{/transfer}">transfer</a></li>
+				<li><a th:href="none.html">Profil</a></li>
+				<li><a th:href="none.html">Contact</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="row" th:fragment="main-content"></div>
+	<footer th:fragment="copyright"></footer>
+</body>
+</html>
