@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.paymybuddy.app.models.AccountBank;
 import com.paymybuddy.app.repository.AccountBankRepository;
@@ -29,6 +30,14 @@ public class AccountBankController {
     public String submissionResult(@ModelAttribute("personForm") AccountBank accountBank) {
     	accountBankRepository.save(accountBank);
         return "index";
+    }
+    
+    
+    @RequestMapping("/accountBankList")
+    public String accountBankList(Model model) {
+    	Iterable<AccountBank> accounts = accountBankRepository.findAll();
+    	model.addAttribute("accounts",accounts);
+    	return "accountBankList";
     }
 	
 	

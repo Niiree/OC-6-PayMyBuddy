@@ -26,6 +26,9 @@ public class TransactionController {
 		return "transaction_history";
 	}
 	
-	
+    @RequestMapping("/transfer")
+    public String transfer() {
+    	return "layouts/transfer";
+    }
 	
 }
