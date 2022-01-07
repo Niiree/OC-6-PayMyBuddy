@@ -25,18 +25,6 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@GetMapping("/userCreation")
-    public String userCreatForm(Model model) {
-        model.addAttribute("createUserForm", new User());
-        return "createUserForm";
-    }
-
-    @PostMapping("/userCreation")
-    public String submissionResult(@ModelAttribute("userCreatForm") User user) {
-    	userService.saveUser(user);
-        return "layouts/home";
-    }
-    
 	
     @RequestMapping("/")
     public String home() {
@@ -67,7 +55,7 @@ public class UserController {
     public String listUsers(Model model) {
         List<User> listUsers = userRepo.findAll();
         model.addAttribute("listUsers", listUsers);
-         
+    
         return "users";
     }
     

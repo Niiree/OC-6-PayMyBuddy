@@ -28,6 +28,9 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	public User userByID(int id) {
+		return userRepository.getById(id);
+	}
 
 	private PasswordEncoder passwordEncoder() {
 	return new BCryptPasswordEncoder();	

@@ -16,5 +16,15 @@ public class AppController {
 	public String viewHomePage() {
 		return "essai";
 	}
-
+	
+	@GetMapping("/")
+	public String home() {
+		return "home";
+	}
+	
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
+	
 }

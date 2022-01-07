@@ -20,7 +20,15 @@ public class AccountBankController {
 	private AccountBankRepository accountBankRepository;
 	
 	
-	@GetMapping("/accountBank")
+    @GetMapping("/accountBanks")
+    public String accountBankList(Model model) {
+    	Iterable<AccountBank> accounts = accountBankRepository.findAll();
+    	model.addAttribute("accounts",accounts);
+    	return "accountBankList";
+    }
+	
+	
+	@GetMapping("/createAccountBank")
     public String accountBankForm(Model model) {
         model.addAttribute("accountBankForm", new AccountBank());
         return "createAccountBank";
@@ -33,12 +41,6 @@ public class AccountBankController {
     }
     
     
-    @RequestMapping("/accountBankList")
-    public String accountBankList(Model model) {
-    	Iterable<AccountBank> accounts = accountBankRepository.findAll();
-    	model.addAttribute("accounts",accounts);
-    	return "accountBankList";
-    }
-	
+
 	
 }
