@@ -1,22 +1,36 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}" href="../static/materialize.css"/>
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}" href="../static/main.css"/>
 <title>App Fragments</title>
 </head>
 <body>
-	<nav th:fragment="navbar">
-		<div class="nav-wrapper white ">
-			<a th:href="@{/}" class="brand-logo #00897b teal darken-1">PayMyBuddy</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down black">
-				<li><a th:href="@{/}">Home</a></li>
-				<li><a th:href="@{/transfer}">transfer</a></li>
-				<li><a th:href="none.html">Profil</a></li>
-				<li><a th:href="none.html">Contact</a></li>
-			</ul>
+	<header th:fragment="header">
+			<div style="height: 50px border">
+				<div id="paymybuddy_Header" class="card-panel blue-grey darken-3 center-align no-shadow">
+					<span class="white-text">pay my buddy</span>
+				</div>
 		</div>
+	</header>
+	<nav th:fragment="navbar" id="navbar">
+				<div class="nav-wrapper white z-depth-0">
+					<div class="col">
+						<a id="logo" th:href="@{/}" class="brand-logo green">Pay My Buddy</a>
+					</div>
+						<!-- Links -->
+						<ul id="nav-mobile" class="right hide-on-med-and-down white ">
+							<li class="navbar-nav "><a th:href="@{/index}" class="blue-text text-darken-2">Home</a></li>
+							<li class="navbar-nav"><a th:href="@{/accountBanks}" class="blue-text text-darken-2">Account</a></li>
+							<li class="navbar-nav"><a th:href="@{/transactions}" class="blue-text text-darken-2">Transfer</a></li>
+							<li class="navbar-nav"><a th:href="@{/}" class="blue-text text-darken-2">Profil</a></li>
+							<li class="navbar-nav"><a th:href="@{/}" class="blue-text text-darken-2">Contact</a></li>
+							<li class="navbar-nav" sec:authorize="isAuthenticated"><a th:href="@{/}" class="blue-text text-darken-2">Logout</a></li>
+						</ul>
+				</div>
 	</nav>
-	<div class="row" th:fragment="main-content"></div>
-	<footer th:fragment="copyright"></footer>
 </body>
 </html>

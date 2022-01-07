@@ -8,11 +8,12 @@
 <link rel="stylesheet" type="text/css" th:href="@{/materialize.css}" href="../../static/materialize.css" />
 </head>
 <body>
-	<div id="transfer-nav"	th:insert="~{/fragments/app-fragments :: navbar}">Nav</div>
-    <h1>th:each</h1>
+<header th:replace="fragments/app-fragments :: header"></header>
+<div th:replace="fragments/app-fragments :: navbar"></div>
+    <h1>Account bank list</h1>
     
-    <div id="transfer-main-content">
-	</div>
+    <div class="container">
+
     <table border="1">
         <tr>
           <th>iban</th>
@@ -23,5 +24,9 @@
           <td th:utext="${account.zip}">ZIP</td>
         </tr>
     </table>
+    
+    <a th:href="@{/createAccountBank}" class="blue-text text-darken-2">Create account</a>
+    </div>
+    
 </body>
 </html>

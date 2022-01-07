@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--  main-fragment (title, otherStaticResources, header, nav, mainContent, footer)  -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <title>Home</title>
 <link rel="stylesheet" type="text/css" th:href="@{/main.css}"
@@ -12,8 +13,12 @@
 <div id="home-nav"
 		th:insert="~{/fragments/app-fragments :: navbar}">Nav</div>
 	<div id="home-main-content">
-		<h2>Homepage</h2>
+		<h2>Page d'accueil</h2>
 		<div>Content of Home Page</div>
+		Logged user: <span sec:authorize="isAuthentificated">Bob</span>
+		    <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
 	</div>
 </body>
 </html>

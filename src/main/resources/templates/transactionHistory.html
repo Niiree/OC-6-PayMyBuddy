@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Une page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+	href="../../static/main.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}">
+  </head>
+  <body>
+  <header th:replace="fragments/app-fragments :: header"></header>
+	<nav th:replace="fragments/app-fragments :: navbar"></nav>
+	<div class="container">
+	<h2>Transaction history</h2>
+	
+    <tr data-th-each="transaction : ${ transactions }">
+      <td data-th-text="${ transaction.id }"></td>
+      <td data-th-text="${ transaction.libelle_perso }"></td>
+      <td data-th-text="${ transaction.balance }"></td>
+    </tr>
+    
+    <a th:href="@{/createTransfer}" class="blue-text text-darken-2">Create new transaction</a>
+    </div>
+  </body>
+</html>
