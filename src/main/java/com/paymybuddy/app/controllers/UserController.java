@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.paymybuddy.app.configuration.Security;
 import com.paymybuddy.app.models.AccountBank;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.UserRepository;
@@ -25,17 +26,24 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private Security security;
+	
 	
     @RequestMapping("/")
     public String home() {
     	return "layouts/home";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+    		return "login";
     }
  
   
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-         
         return "signup_form";
     }
 	
