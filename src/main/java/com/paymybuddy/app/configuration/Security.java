@@ -64,7 +64,8 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .anyRequest().authenticated()
+        	.antMatchers("/register","/process_register","register_success").permitAll()
+            .anyRequest().authenticated()     
             .and()
             .formLogin()
             	.loginPage("/login")
@@ -74,12 +75,7 @@ public class Security extends WebSecurityConfigurerAdapter {
             .logout().logoutSuccessUrl("/").permitAll();
     }
     
-   /* 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/resources/**").anyRequest(); //Exclusion du dossier resources
-    }*/
+
 
 
 }
