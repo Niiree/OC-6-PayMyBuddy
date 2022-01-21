@@ -1,5 +1,7 @@
 package com.paymybuddy.app.controllers;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,12 @@ public class AccountBankController {
 	
     @GetMapping("/accountBanks")
     public String accountBankList(Model model) {
-    	Iterable<AccountBank> accounts = accountBankRepository.findAll();
-    	model.addAttribute("accounts",accounts);
+    	int idUser = userRepository.findByEmail(nameUserConnect()).getId();
+    	Optional<AccountBank> accounts = accountBankRepository.findById(idUser);
+    	if(accounts.isPresent()) {
+    		model.addAttribute("accounts",accounts.get());
+    	}
+    	
     	return "accountBankList";
     }
 	
@@ -44,15 +50,16 @@ public class AccountBankController {
 
     @PostMapping("/accountBank")
     public String submissionResult(@ModelAttribute("personForm") AccountBank accountBank,HttpServletRequest request) {
-    	Authentication authentification = SecurityContextHolder.getContext().getAuthentication();
-    	String currentName = authentification.getName();
-    	
-    	accountBank.setUser(userRepository.findByEmail(currentName));
-    	
+    	accountBank.setUser(userRepository.findByEmail(nameUserConnect()));
+    	//TODO Vérification si user exist
     	accountBankRepository.save(accountBank);
         return "index";
     }
     
+    private String nameUserConnect() {
+    	Authentication authentification = SecurityContextHolder.getContext().getAuthentication();
+    	return authentification.getName();
+    }
     
 
 	

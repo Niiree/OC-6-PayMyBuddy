@@ -30,10 +30,10 @@ public class UserController {
 	private Security security;
 	
 	
-    @RequestMapping("/")
+   /* @RequestMapping("/")
     public String home() {
     	return "layouts/home";
-    }
+    }*/
     
     @GetMapping("/login")
     public String login() {

@@ -48,7 +48,6 @@ public class TransactionController {
     @PostMapping("/createTransfer")
         public String submissionResult(@ModelAttribute("createTransferForm") Transaction transaction) {
     		transaction.setDate_transaction(LocalDate.now());
-    		
     		//TODO Test en cours
     		transaction.setEmitter(userService.userByID(1));
     		transaction.setReceiver(userService.userByID(2));

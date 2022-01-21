@@ -2,6 +2,7 @@ package com.paymybuddy.app.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name="users")
@@ -115,6 +119,7 @@ public class User {
 	public void setStatut_active(Boolean statut_active) {
 		this.statut_active = statut_active;
 	}
+
 
 
 

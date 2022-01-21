@@ -22,9 +22,9 @@ public class AppController {
 		return "home";
 	}
 	
-	@GetMapping("/index")
+	/*@GetMapping("/index")
 	public String index() {
 		return "index";
-	}
+	}*/
 	
 }
