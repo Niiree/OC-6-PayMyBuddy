@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.paymybuddy.app.models.AccountBank;
+import com.paymybuddy.app.models.User;
 
 
 @Repository
@@ -11,7 +12,6 @@ public interface AccountBankRepository extends CrudRepository<AccountBank, Integ
 	
 	
 	AccountBank findByIban(String iban);
-	
 	
 
 

@@ -37,7 +37,7 @@ public class User {
 	@Column(name="date_creat")
 	private LocalDate date_creation;
 	
-	@Column(name="email")
+	@Column(name="email", unique = true)
 	private String email;
 	
 	@Column(name="password")

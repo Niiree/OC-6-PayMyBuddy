@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,12 +17,14 @@ public class AccountBank {
 	@Column(name="id")
 	private int id;
 	
+	@OneToOne
+	private User user;
+	
 	@Column(name="name",nullable=false)
 	private String name;
 	
 	@Column(name="iban",nullable=false)
 	private String iban;
-	
 
 	@Column(name="address")
 	private String address;
@@ -98,5 +101,12 @@ public class AccountBank {
 		this.zip = zip;
 	}
 
+	public User getUser() {
+		return user;
+	}
+	
+	public User setUser(User user) {
+		return this.user = user ;
+	}
 
 }
