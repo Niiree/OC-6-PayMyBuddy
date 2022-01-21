@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import com.paymybuddy.app.services.CustomUserDetailsService;
@@ -61,21 +62,25 @@ public class Security extends WebSecurityConfigurerAdapter {
         return authentication.isAuthenticated();
     }
  
+    
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        	.antMatchers("/register","/process_register","register_success").permitAll()
+        	.antMatchers("/materialize.css","/main.css","/resources/static/**","/register","/process_register","register_success","/static/**","/images/**","materialize.css").permitAll()
             .anyRequest().authenticated()     
             .and()
             .formLogin()
             	.loginPage("/login")
             	.loginProcessingUrl("/login")
+            	.defaultSuccessUrl("/")
             	.permitAll()
             .and()
-            .logout().logoutSuccessUrl("/").permitAll();
+            .logout()
+            .clearAuthentication(true)
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/")
+            .deleteCookies().permitAll();
     }
     
-
-
-
 }
