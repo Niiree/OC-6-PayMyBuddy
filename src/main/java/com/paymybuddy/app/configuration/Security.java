@@ -64,7 +64,7 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        	.antMatchers("/materialize.css","/main.css","/resources/static/**","/register","/process_register","register_success","/static/**","/images/**","materialize.css").permitAll()
+        	.antMatchers("/materialize.css","/main.css","/resources/static/**","/signup","/process_register","signup_success","/static/**","/images/**","materialize.css").permitAll()
             .anyRequest().authenticated()     
             .and()
             .formLogin()
