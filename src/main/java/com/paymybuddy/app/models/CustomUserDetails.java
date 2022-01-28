@@ -6,13 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.app.repository.UserRepository;
 
+
 public class CustomUserDetails implements UserDetails {
 	 
-    private User user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private User user;
      
     public CustomUserDetails(User user) {
         this.user = user;
@@ -64,8 +70,6 @@ public class CustomUserDetails implements UserDetails {
     public UserDetails loadUserByUsername(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) throw new UsernameNotFoundException(email);
-
-       
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), null);
     }
