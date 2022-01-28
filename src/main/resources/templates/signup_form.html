@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="ISO-8859-1">
     <title>Sign up</title>
@@ -9,6 +11,12 @@
 </head>
 <header th:replace="fragments/app-fragments :: header"></header>
 <body>
+        
+   
+    <div sec:authorize="isAuthenticated()">
+        Text visible only to authenticated users.
+    </div>
+            
     <div class="container text-center">
         <div>
             <h1>User Registration</h1>
