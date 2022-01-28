@@ -16,10 +16,16 @@
 
     <table border="1">
         <tr>
-          <th>iban</th>
-          <th>zip</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Address</th>
+          <th>Iban</th>
+          <th>Zip</th>
         </tr>
         <tr th:each="account : ${accounts}">
+          <td th:utext="${account.name}">NAME</td>
+          <td th:utext="${account.city}">CITY</td>
+          <td th:utext="${account.address}">ADDRESS</td>
           <td th:utext="${account.iban}">IBAN</td>
           <td th:utext="${account.zip}">ZIP</td>
         </tr>

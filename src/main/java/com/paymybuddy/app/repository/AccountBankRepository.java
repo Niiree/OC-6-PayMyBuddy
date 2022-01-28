@@ -1,5 +1,8 @@
 package com.paymybuddy.app.repository;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +16,9 @@ public interface AccountBankRepository extends CrudRepository<AccountBank, Integ
 	
 	AccountBank findByIban(String iban);
 	
+	 @Query(value = "SELECT * FROM account_bank u WHERE u.user_id = ?1 AND u.statut_active = true", nativeQuery = true)
+	    public List<AccountBank> findAllByIdUser(int id);
+
 
 
 }

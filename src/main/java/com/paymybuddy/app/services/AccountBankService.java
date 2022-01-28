@@ -1,6 +1,7 @@
 package com.paymybuddy.app.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,22 +24,32 @@ public class AccountBankService {
 	public AccountBank createUpdateAccountBank(AccountBank accountBank) {
 		AccountBank accountBankFind = accountBankRepository.findByIban(accountBank.getIban());
 		if(accountBankFind != null) {
-			accountBankFind.setAddress(null);
-			accountBankFind.setCity(null);
+			accountBankFind.setAddress(accountBank.getAddress());
+			accountBankFind.setCity(accountBank.getCity());
 			accountBankFind.setName(accountBank.getName());
 			accountBankFind.setZip(accountBank.getZip());
 			return accountBankRepository.save(accountBankFind);
 		}else {
-			return accountBankRepository.save(accountBankFind);
+			accountBank.setStatutActive(true);
+			return accountBankRepository.save(accountBank);
 		}
 	}
 	
 	public void deleteAccountBank(AccountBank accountBank) throws Exception {
 		AccountBank accountBankFind = accountBankRepository.findByIban(accountBank.getIban());
 		if(accountBankFind!=null) {
-			accountBankRepository.delete(accountBankFind);
+			accountBankFind.setStatutActive(false);
+			accountBankRepository.save(accountBankFind);
 		}else{
 			throw new Exception("Account not find");
 		}
 	}
+	
+	public List<AccountBank> findAccountByIdUser(int id){
+	
+	List<AccountBank> account = accountBankRepository.findAllByIdUser(id);
+	return account;
+	}
+	
+	
 }

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,6 +20,7 @@ public class AccountBank {
 	
 	@OneToOne
 	private User user;
+
 	
 	@Column(name="name",nullable=false)
 	private String name;
@@ -35,6 +37,8 @@ public class AccountBank {
 	@Column(name="zip")
 	private int zip;
 	
+	@Column(name ="statut_active")
+	private boolean statut_active;
 	
 	public int getId() {
 		return id;	
@@ -100,6 +104,14 @@ public class AccountBank {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
+	
+	public boolean getStatutActive() {
+		return statut_active;
+	}
+	
+	public void setStatutActive(boolean statut_active){
+		this.statut_active = statut_active;
+	}
 
 	public User getUser() {
 		return user;
@@ -108,5 +120,6 @@ public class AccountBank {
 	public User setUser(User user) {
 		return this.user = user ;
 	}
+	
 
 }
