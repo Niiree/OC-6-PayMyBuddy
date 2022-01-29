@@ -1,13 +1,10 @@
 package com.paymybuddy.app.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.paymybuddy.app.models.AccountBank;
-import com.paymybuddy.app.models.User;
-import com.paymybuddy.app.repository.AccountBankRepository;
-import com.paymybuddy.app.repository.UserRepository;
 import com.paymybuddy.app.services.AccountBankService;
+import com.paymybuddy.app.services.UserService;
 
 
 
@@ -26,18 +21,15 @@ import com.paymybuddy.app.services.AccountBankService;
 public class AccountBankController {
 	
 	@Autowired
-	private AccountBankRepository accountBankRepository;
-	
-	@Autowired
 	private AccountBankService accountBankService;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
     @GetMapping("/accountBanks")
     public String accountBankList(Model model) {
-    	int idUser = userRepository.findByEmail(nameUserConnect()).getId();
-    	List<AccountBank> accounts = accountBankService.findAccountByIdUser(idUser);
+    	int idUser = userService.getUserConnected().getId();
+    	List<AccountBank> accounts = accountBankService.findAllAccountsByIdUser(idUser);
     	if(!accounts.isEmpty()) {
     		model.addAttribute("accounts",accounts);
     	}
@@ -55,16 +47,11 @@ public class AccountBankController {
 
     @PostMapping("/accountBank")
     public String submissionResult(@ModelAttribute("personForm") AccountBank accountBank,HttpServletRequest request) {
-    	accountBank.setUser(userRepository.findByEmail(nameUserConnect()));
-    	//TODO Vérification si user exist
     	accountBankService.createUpdateAccountBank(accountBank);
         return "home";
     }
     
-    private String nameUserConnect() {
-    	Authentication authentification = SecurityContextHolder.getContext().getAuthentication();
-    	return authentification.getName();
-    }
+
     
 
 	

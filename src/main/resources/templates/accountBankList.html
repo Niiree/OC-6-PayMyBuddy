@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Loop</title>
+    <title>My account bank</title>
     <style>table th, table td {padding: 5px;}</style>
     <link rel="stylesheet" type="text/css" th:href="@{/main.css}" href="../../static/main.css" />
 <link rel="stylesheet" type="text/css" th:href="@{/materialize.css}" href="../../static/materialize.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <header th:replace="fragments/app-fragments :: header"></header>
@@ -27,7 +28,9 @@
           <td th:utext="${account.city}">CITY</td>
           <td th:utext="${account.address}">ADDRESS</td>
           <td th:utext="${account.iban}">IBAN</td>
-          <td th:utext="${account.zip}">ZIP</td>
+          <td th:utext="${account.zip}">ZIP</td>  
+          <td><button class="large material-icons">clear</button></td>  
+          
         </tr>
     </table>
     
