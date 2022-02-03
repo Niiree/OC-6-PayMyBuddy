@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.paymybuddy.app.models.AccountBank;
 import com.paymybuddy.app.services.AccountBankService;
@@ -51,6 +54,13 @@ public class AccountBankController {
         return "home";
     }
     
+    @GetMapping("/delete_accountBank/{id}")
+    public String deleteAccountBank(@PathVariable int id) {
+    	accountBankService.disableAccountBank(id);
+    	System.out.println(id);
+        System.out.println("test");
+    	return "home";
+    }
 
     
 

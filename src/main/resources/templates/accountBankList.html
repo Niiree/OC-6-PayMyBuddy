@@ -29,7 +29,7 @@
           <td th:utext="${account.address}">ADDRESS</td>
           <td th:utext="${account.iban}">IBAN</td>
           <td th:utext="${account.zip}">ZIP</td>  
-          <td><button class="large material-icons">clear</button></td>  
+          <td><a th:href="|@{/delete_accountBank/{id}(id=${account.id})}|"class="large material-icons">clear</a></td>  
           
         </tr>
     </table>
