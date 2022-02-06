@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
-    <title>Une page</title>
+    <title>Transactions</title>
     <link rel="stylesheet" type="text/css" th:href="@{/main.css}"
 	href="../../static/main.css" />
 	<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}">
@@ -12,14 +12,29 @@
 	<nav th:replace="fragments/app-fragments :: navbar"></nav>
 	<div class="container">
 	<h2>Transaction history</h2>
-	
+	<a th:href="@{/createTransfer}" class="blue-text text-darken-2">Create new transaction</a>
+    <a th:href="@{/createTransferBank}" class="blue-text text-darken-2">Create new bank transaction</a>
+    <table border = "1">
+    <tr>
+      <th>id transaction</th>
+      <th>Emitter</th>
+      <th>Balance</th>
+      <th>Balance</th>
+    </tr>
     <tr data-th-each="transaction : ${ transactions }">
       <td data-th-text="${ transaction.id }"></td>
+      <div th:if="${transaction.emitter.id == transaction.receiver.id}">
+      	<td data-th-text="${ transaction.emitter.firstName} + '!' + ${transaction.emitter.lastName}"></td>
+      </div>
+      <div th:unlessf="${transaction.emitter != transaction.receiver}">
+      	<td data-th-text="${ transaction.emitter.firstName }"></td>
+      </div>
       <td data-th-text="${ transaction.libelle_perso }"></td>
       <td data-th-text="${ transaction.balance }"></td>
     </tr>
-    
-    <a th:href="@{/createTransfer}" class="blue-text text-darken-2">Create new transaction</a>
+    </table>
+
+
     </div>
   </body>
 </html>

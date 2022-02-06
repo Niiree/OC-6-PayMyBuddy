@@ -15,15 +15,32 @@
 
 
 	<div id="transfer-main-content" class="container">
-		<h2>create transaction</h2>
+		<h2>Create transaction Bank</h2>
 
-		<form th:action="@{/createTransfer}" th:object="${createTransferForm}" method="post">
-			<p>Balance <input type="number" th:field="*{balance}" /></p>
-			<p>Libelle <input type="text" th:field="*{libelle_perso}" /></p>
-			<p>User <input type="number"  /></p>
-			<p><input type="submit" value="Submit" /></p>
+		<form th:action="@{/createTransferBank}" th:object="${createTransferForm}"
+			method="post">
+
+			<p>
+				Balance <input type="number" th:field="*{balance}" />
+			</p>
+			<p>
+				Libelle <input type="text" th:field="*{libelle_perso}" />
+			</p>
+
+
+			<label>Account Bank</label> <select class="browser-default "
+				th:field="*{accountBank}">
+				<option th:each="bank : ${banks}" th:value="${bank.id}"
+					th:text="${bank.name}"></option>
+
+			</select>
+
+
+			<p>
+				<input type="submit" value="Submit" />
+			</p>
 		</form>
-		
+
 	</div>
 
 

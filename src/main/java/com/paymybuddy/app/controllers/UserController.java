@@ -50,13 +50,20 @@ public class UserController {
     }
     
 
-    @GetMapping("/users")
-    public String listUsers(Model model) {
+    @GetMapping("/contact")
+    public String userContact(Model model) {
         List<User> listUsers = userRepo.findAll();
         model.addAttribute("listUsers", listUsers);
     
-        return "users";
+        return "user_contact";
     }
     
+    @GetMapping("/profil")
+    public String profil(Model model) {
+        User user = userService.getUserConnected();
+        model.addAttribute("user", user);
+    
+        return "user_profil";
+    }
     
 }

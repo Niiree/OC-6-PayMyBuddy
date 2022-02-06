@@ -20,8 +20,9 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepository transactionRepository;
 	
+	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	
 	public Iterable<Transaction> findAll(){
@@ -61,12 +62,23 @@ public class TransactionService {
 			}
 		}else {
 			throw new Exception ("Same user");
-		}
+		}	
+	}
+		 
+	
+	public void createTransactionBank(Transaction transaction) {
+		User user = userService.getUserConnected();
+		transaction.setDate_transaction(LocalDate.now());
+		transaction.setEmitter(user);
+		transaction.setReceiver(user);
+		transaction.setIs_account_bank(true);
+		transactionRepository.save(transaction);
 		
 		
 		
 	}
-		 
+	
+	
 		 
 		
 		

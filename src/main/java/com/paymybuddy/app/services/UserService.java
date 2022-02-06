@@ -38,8 +38,8 @@ public class UserService {
 	
     public User getUserConnected() {
     	Authentication authentification = SecurityContextHolder.getContext().getAuthentication();
-    	return userRepository.findByEmail(authentification.getName());
-    	    
+    	return userRepository.findByEmail(authentification.getName());	    
     }
+    
 
 }

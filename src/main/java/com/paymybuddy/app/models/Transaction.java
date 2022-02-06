@@ -1,16 +1,11 @@
 package com.paymybuddy.app.models;
 
 import java.time.LocalDate;
-import java.util.Date;
-
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -42,6 +37,44 @@ public class Transaction {
 	
 	@Column(name="libelle_perso")
 	private String libelle_perso;
+	
+	@Column(name="is_account_bank")
+	private Boolean is_account_bank;
+	
+	@Column(name="id_account_bank")
+	private int accountBank; 
+
+
+	/**
+	 * @return the accountBank
+	 */
+	public int getAccountBank() {
+		return accountBank;
+	}
+
+
+	/**
+	 * @param accountBank the accountBank to set
+	 */
+	public void setAccountBank(int accountBank) {
+		this.accountBank = accountBank;
+	}
+
+
+	/**
+	 * @return the is_account_bank
+	 */
+	public Boolean getIs_account_bank() {
+		return is_account_bank;
+	}
+
+
+	/**
+	 * @param is_account_bank the is_account_bank to set
+	 */
+	public void setIs_account_bank(Boolean is_account_bank) {
+		this.is_account_bank = is_account_bank;
+	}
 
 
 	/**
