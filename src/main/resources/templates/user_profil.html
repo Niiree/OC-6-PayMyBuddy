@@ -14,7 +14,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:replace="fragments/app-fragments :: navbar"></div>
 <div class="container text-center">
     <div>
-        <h1>Hello ${user.firstName} ${user.lastName}  </h1>
+        <h1 th:text="${user.lastName} + ' '+${user.firstName}"></h1>
     </div>
      
     <div>
@@ -32,7 +32,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <td th:text="${user.email}">E-mail</td>
                     <td th:text="${user.firstName}">First Name</td>
                     <td th:text="${user.lastName}">Last Name</td>
-                    <td th:text="${user.balance}"> Balance </td>
+                    <td th:text="${user.balance} + ' €'"> Balance </td>
                 </tr>
             </tbody>
         </table>
