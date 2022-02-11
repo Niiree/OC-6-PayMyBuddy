@@ -17,20 +17,23 @@
     <table border = "1">
     <tr>
       <th>id transaction</th>
+      <th>Date</th>
       <th>Emitter</th>
-      <th>Balance</th>
+      <th>Receiver</th>
+      <th>Libelle</th>
       <th>Balance</th>
     </tr>
     <tr data-th-each="transaction : ${ transactions }">
-      <td data-th-text="${ transaction.id }"></td>
-      <div th:if="${transaction.emitter.id == transaction.receiver.id}">
-      	<td data-th-text="${ transaction.emitter.firstName} + '!' + ${transaction.emitter.lastName}"></td>
-      </div>
-      <div th:unlessf="${transaction.emitter != transaction.receiver}">
-      	<td data-th-text="${ transaction.emitter.firstName }"></td>
-      </div>
+      <td data-th-text="${ transaction.id_transaction }"></td> 
+      <td data-th-text="${ transaction.date_transaction }"></td> 
+      <td th:if="${transaction.emitter.id == transaction.receiver.id}" data-th-text="${ transaction.emitter.firstName} +' '+ ${transaction.emitter.lastName}">k</td>
+      <td th:if="${transaction.emitter.id == transaction.receiver.id}" data-th-text="${ transaction.accountBank.name}">k</td>
+           
+      <td th:if="${transaction.emitter != transaction.receiver}" data-th-text="${ transaction.receiver.firstName} +' '+ ${ transaction.emitter.lastName }"></td>
+      <td th:if="${transaction.emitter != transaction.receiver}" data-th-text="${ transaction.receiver.firstName} +' '+ ${ transaction.receiver.lastName }"></td>
+    
       <td data-th-text="${ transaction.libelle_perso }"></td>
-      <td data-th-text="${ transaction.balance }"></td>
+      <td data-th-text="${ transaction.balance + ' €'}" ></td>
     </tr>
     </table>
 
