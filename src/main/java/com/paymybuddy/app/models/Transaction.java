@@ -1,6 +1,8 @@
 package com.paymybuddy.app.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,11 +31,14 @@ public class Transaction {
 	@Column(name="balance")
 	private float balance;
 	
+	@Column(name="id_transaction")
+	private String id_transaction;
+	
 	@Column(name="statut_transaction")
 	private boolean statut_transaction;
 	
 	@Column(name="date_transaction")
-	private LocalDate date_transaction;
+	private LocalDateTime date_transaction;
 	
 	@Column(name="libelle_perso")
 	private String libelle_perso;
@@ -41,14 +46,29 @@ public class Transaction {
 	@Column(name="is_account_bank")
 	private Boolean is_account_bank;
 	
-	@Column(name="id_account_bank")
-	private int accountBank; 
+	@OneToOne
+	private AccountBank accountBank; 
 
+	/**
+	 * @return the id_transaction
+	 */
+	public String getId_transaction() {
+		return id_transaction;
+	}
+
+
+	/**
+	 * @param string the id_transaction to set
+	 */
+	public void setId_transaction(String string) {
+		this.id_transaction = string;
+	}
+	
 
 	/**
 	 * @return the accountBank
 	 */
-	public int getAccountBank() {
+	public AccountBank getAccountBank() {
 		return accountBank;
 	}
 
@@ -56,7 +76,7 @@ public class Transaction {
 	/**
 	 * @param accountBank the accountBank to set
 	 */
-	public void setAccountBank(int accountBank) {
+	public void setAccountBank(AccountBank accountBank) {
 		this.accountBank = accountBank;
 	}
 
@@ -160,7 +180,7 @@ public class Transaction {
 	/**
 	 * @return the date_transaction
 	 */
-	public LocalDate getDate_transaction() {
+	public LocalDateTime getDate_transaction() {
 		return date_transaction;
 	}
 
@@ -168,7 +188,7 @@ public class Transaction {
 	/**
 	 * @param localDate the date_transaction to set
 	 */
-	public void setDate_transaction(LocalDate localDate) {
+	public void setDate_transaction(LocalDateTime localDate) {
 		this.date_transaction = localDate;
 	}
 
