@@ -1,12 +1,15 @@
 package com.paymybuddy.app.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +31,7 @@ public class User {
 	private float balance;
 	
 	@Column(name="date_creat")
-	private LocalDate date_creation;
+	private LocalDateTime date_creation;
 	
 	@Column(name="email", unique = true)
 	private String email;
@@ -38,8 +41,27 @@ public class User {
 	
 	@Column(name="statut_Active")
 	private Boolean statut_active;
-	
-	
+
+    @OneToMany
+    private  Set<User> contact;
+
+
+	/**
+	 * @return the contact
+	 */
+	public Set<User> getContact() {
+		return contact;
+	}
+
+
+	/**
+	 * @param contact the contact to set
+	 */
+	public void setContact(Set<User> contact) {
+		this.contact = contact;
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -69,11 +91,11 @@ public class User {
 		this.balance = balance;
 	}
 
-	public LocalDate getDate_creation() {
+	public LocalDateTime getDate_creation() {
 		return date_creation;
 	}
 
-	public void setDate_creation(LocalDate localDate) {
+	public void setDate_creation(LocalDateTime localDate) {
 		this.date_creation = localDate;
 	}
 
@@ -107,14 +129,7 @@ public class User {
 	 */
 	public void setStatut_active(Boolean statut_active) {
 		this.statut_active = statut_active;
-	}
-
-
-
-
-
-
-	
+	}	
 	
 }
 
