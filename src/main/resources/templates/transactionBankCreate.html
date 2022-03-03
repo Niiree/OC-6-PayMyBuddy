@@ -20,14 +20,8 @@
 		<form th:action="@{/createTransferBank}" th:object="${createTransferForm}"
 			method="post">
 
-			<p>
-				Balance <input type="number" th:field="*{balance}" />
-			</p>
-			<p>
-				Libelle <input type="text" th:field="*{libelle_perso}" />
-			</p>
-
-
+			<p>Balance <input type="number" th:field="*{balance}" /></p>
+			<p>Libelle <input type="text" th:field="*{libelle_perso}" /></p>
 			<label>Account Bank</label> <select class="browser-default "
 				th:field="*{accountBank}">
 				<option th:each="bank : ${banks}" th:value="${bank.id}"

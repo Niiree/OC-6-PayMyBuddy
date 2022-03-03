@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Create transfer</title>
+<title>Add contact</title>
 <link rel="stylesheet" type="text/css" th:href="@{/main.css}"
 	href="../../static/main.css" />
 <link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
@@ -15,23 +15,13 @@
 
 
 	<div id="transfer-main-content" class="container">
-		<h2>create transaction</h2>
+		<h2>Add new contact</h2>
 
-		<form th:action="@{/createTransfer}" th:object="${createTransferForm}" method="post">
-			<p>Balance <input type="number" th:field="*{balance}" /></p>
-			<p>Libelle <input type="text" th:field="*{libelle_perso}" /></p>
-			<label>Friend</label> 
-			<select class="browser-default " th:field="*{receiver}">
-				<option th:each="test : ${tests}" th:value="${test.id}"
-					th:text="${test.email}"></option>
-			</select>
-
-			
-			<p><input type="submit" value="Submit" /></p>
+		<form th:action="@{/addFriend}" th:object="${createFriendForm}" method="post">
+			<p>Email <input type="text" th:field="*{email}" /></p>
+			<p><input type="submit" value="Send invitation" /></p>
 		</form>
-		
 	</div>
-
 
 </body>
 </html>
