@@ -1,6 +1,6 @@
 package com.paymybuddy.app.services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,8 +23,9 @@ public class UserService {
 		
 	
 	public void saveUser(User user) {
-		user.setDate_creation(LocalDate.now());
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
+        user.setStatut_active(true);
+        user.setDate_creation(LocalDateTime.now());
 		userRepository.save(user);
 	}
 	
@@ -39,7 +40,6 @@ public class UserService {
     public User getUserConnected() {
     	Authentication authentification = SecurityContextHolder.getContext().getAuthentication();
     	return userRepository.findByEmail(authentification.getName());	    
-    }
-    
+    } 
 
 }

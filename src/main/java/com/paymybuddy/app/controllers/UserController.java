@@ -1,6 +1,8 @@
 package com.paymybuddy.app.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -41,29 +43,50 @@ public class UserController {
 	
     @PostMapping("/process_register")
     public String processRegister(User user) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userRepo.save(user);
-         
+        userService.saveUser(user);
         return "signup_success";
     }
     
 
     @GetMapping("/contact")
     public String userContact(Model model) {
-        List<User> listUsers = userRepo.findAll();
+    	User userConnected = userService.getUserConnected();
+    	Set<User> t = userConnected.getContact();
+        Set<User> listUsers = t;
         model.addAttribute("listUsers", listUsers);
     
         return "user_contact";
     }
     
+    
     @GetMapping("/profil")
     public String profil(Model model) {
-        User user = userService.getUserConnected();
-        model.addAttribute("user", user);
-    
-        return "user_profil";
+    	User user = userService.getUserConnected();
+    	model.addAttribute("user", user);
+    	
+    	return "user_profil";
     }
     
+    
+    @GetMapping("/addFriend")
+    public String addFriend(Model model){
+    	model.addAttribute("createFriendForm", new User());
+    	return "userContactCreate";
+    }
+
+    
+	@PostMapping("/addFriend")
+	public String formFriend (String email) {
+	User userConnected = userService.getUserConnected();
+	User userFind = userRepo.findByEmail(email);
+	if(userFind != null && userFind != userConnected) {
+		Set<User> set = userConnected.getContact();
+		set.add(userFind);
+		userConnected.setContact(set);
+	}
+	userRepo.save(userConnected);
+	return "redirect:/contact";
+	}
+	
+	
 }

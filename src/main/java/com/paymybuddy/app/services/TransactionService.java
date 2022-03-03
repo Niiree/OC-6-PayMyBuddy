@@ -43,7 +43,8 @@ public class TransactionService {
 	
 	@Transactional
 	public Transaction createTransaction(Transaction transaction) throws Exception {
-		User emitter = transaction.getEmitter();
+		User emitter = userService.getUserConnected();
+		transaction.setEmitter(emitter);
 		User receiver = transaction.getReceiver();
 		
 		if(emitter != receiver) {
@@ -54,7 +55,10 @@ public class TransactionService {
 					transaction.setDate_transaction(LocalDateTime.now());
 					transaction.setEmitter(emitter);
 					transaction.setReceiver(receiver);
+					transaction.setIs_account_bank(false);
 					transaction.setStatut_transaction(true);
+					transaction.setId_transaction(hashTransaction());
+					
 					return transactionRepository.save(transaction);
 				
 				}else {
