@@ -13,11 +13,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:replace="fragments/app-fragments :: header"></header>
 <div th:replace="fragments/app-fragments :: navbar"></div>
 <div class="container text-center">
+  
     <div>
         <h1>List of Users</h1>
     </div>
      
     <div>
+      <a th:href="@{/addFriend}" class="blue-text text-darken-2">Add new friend</a>
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
