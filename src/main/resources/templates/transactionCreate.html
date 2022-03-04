@@ -12,26 +12,26 @@
 <body>
 	<header th:replace="fragments/app-fragments :: header"></header>
 	<nav th:replace="fragments/app-fragments :: navbar"></nav>
-
-
 	<div id="transfer-main-content" class="container">
 		<h2>create transaction</h2>
 
-		<form th:action="@{/createTransfer}" th:object="${createTransferForm}" method="post">
-			<p>Balance <input type="number" th:field="*{balance}" /></p>
-			<p>Libelle <input type="text" th:field="*{libelle_perso}" /></p>
-			<label>Friend</label> 
-			<select class="browser-default " th:field="*{receiver}">
-				<option th:each="test : ${tests}" th:value="${test.id}"
-					th:text="${test.email}"></option>
+		<form th:action="@{/createTransfer}" th:object="${createTransferForm}"
+			method="post">
+			<p>
+				Balance <input type="number" th:field="*{balance}" />
+			</p>
+			<p>
+				Libelle <input type="text" th:field="*{libelle_perso}" />
+			</p>
+			<label>Friend</label> <select class="browser-default "
+				th:field="*{receiver}">
+				<option th:each="user : ${users}" th:value="${user.id}"
+					th:text="${user.email}"></option>
 			</select>
-
-			
-			<p><input type="submit" value="Submit" /></p>
+			<p>
+				<input type="submit" value="Submit" />
+			</p>
 		</form>
-		
 	</div>
-
-
 </body>
 </html>
