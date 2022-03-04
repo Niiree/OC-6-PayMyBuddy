@@ -29,8 +29,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private UserRepository userRepo; //TODO A REMOVE
 
 	@Autowired
 	private Security security;
