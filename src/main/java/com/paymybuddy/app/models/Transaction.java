@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="transaction")
-//@Access(AccessType.PROPERTY)
 public class Transaction {
 
 	@Id
