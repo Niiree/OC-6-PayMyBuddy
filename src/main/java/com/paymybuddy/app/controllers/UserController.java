@@ -54,20 +54,14 @@ public class UserController {
 
 	@GetMapping("/contact")
 	public String userContact(Model model) {
-		User userConnected = userService.getUserConnected();
-		Set<User> t = userConnected.getContact();
-		Set<User> listUsers = t;
-		model.addAttribute("listUsers", listUsers);
-
+		model.addAttribute("listUsers", userService.getContactUserConnected());
 		return "user_contact";
 	}
 
 
 	@GetMapping("/profil")
 	public String profil(Model model) {
-		User user = userService.getUserConnected(); 
-		model.addAttribute("user", user);
-
+		model.addAttribute("user", userService.getUserConnected(); );
 		return "user_profil";
 	}
 
@@ -78,18 +72,9 @@ public class UserController {
 		return "userContactCreate";
 	}
 
-
-	//TODO A REFACTOR EN DESSOUS
 	@PostMapping("/addFriend")
 	public String formFriend (String email) {
-		User userConnected = userService.getUserConnected();
-		User userFind = userRepo.findByEmail(email);
-		if(userFind != null && userFind != userConnected) {
-			Set<User> set = userConnected.getContact();
-			set.add(userFind);
-			userConnected.setContact(set);
-		}
-		userRepo.save(userConnected);
+		userService.addFriend(email);
 		return "redirect:/contact";
 	}
 
