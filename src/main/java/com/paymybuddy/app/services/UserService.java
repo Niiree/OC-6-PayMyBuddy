@@ -33,15 +33,35 @@ public class UserService {
 		return userRepository.getById(id);
 	}
 
-	private PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();	
-	}
+	
 
 	public User getUserConnected() {
 		Authentication authentification = SecurityContextHolder.getContext().getAuthentication();
 		return userRepository.findByEmail(authentification.getName());	    
 	} 
 	
+	public addFriend(String email) {
+		User userConnected = userService.getUserConnected();
+		User userFind = userRepo.findByEmail(email);
+		//Vérification si l'utilisateur ajouté existe + pas celui connecté
+		if((userFind != null) && (userFind != userConnected)) {
+			Set<User> set = userConnected.getContact();
+			set.add(userFind);
+			userConnected.setContact(set);
+		}
+		userRepo.save(userConnected);	
+	}
 	
+	//Contact de l'utilisateur connecté
+	public Set<USer> getContactUserConnected() {
+		User userConnected = userService.getUserConnected();
+		Set<User> userContact = userConnected.getContact();
+		Set<User> listUsers = userContact;
+		return listUsers;
+	}
+	
+	private PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();	
+	}
 
 }
