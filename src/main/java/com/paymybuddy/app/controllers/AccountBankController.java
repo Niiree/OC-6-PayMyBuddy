@@ -32,8 +32,7 @@ public class AccountBankController {
 
 	@GetMapping("/accountBanks")
 	public String accountBankList(Model model) {
-		int idUser = userService.getUserConnected().getId();
-		List<AccountBank> accounts = accountBankService.findAllAccountsByIdUser(idUser);
+		List<AccountBank> accounts = accountBankService.findAllAccountsByIdUser(userService.getUserConnected().getId());
 		if(!accounts.isEmpty()) {
 			model.addAttribute("accounts",accounts);
 		}
@@ -56,8 +55,6 @@ public class AccountBankController {
 	@GetMapping("/delete_accountBank/{id}")
 	public String deleteAccountBank(@PathVariable int id) {
 		accountBankService.disableAccountBank(id);
-		System.out.println(id);
-		System.out.println("test");
 		return "home";
 	}
 
