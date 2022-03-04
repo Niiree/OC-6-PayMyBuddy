@@ -73,9 +73,7 @@ public class AccountBankService {
 		List<AccountBank> account = accountBankRepository.findAllByIdUser(id);
 		return account;
 	}
-
-
-
+	
 
 
 
