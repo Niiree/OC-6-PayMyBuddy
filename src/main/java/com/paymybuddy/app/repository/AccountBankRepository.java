@@ -11,12 +11,12 @@ import com.paymybuddy.app.models.AccountBank;
 
 @Repository
 public interface AccountBankRepository extends CrudRepository<AccountBank, Integer> {
-	
-	
+
+
 	AccountBank findByIban(String iban);
-	
-	 @Query(value = "SELECT * FROM account_bank u WHERE u.user_id = ?1 AND u.statut_active = true", nativeQuery = true)
-	    public List<AccountBank> findAllByIdUser(int id);
+	// Return tout les AccountBank sous statut d'un utilisateur :ID User
+	@Query(value = "SELECT * FROM account_bank u WHERE u.user_id = ?1 AND u.statut_active = true", nativeQuery = true)
+	public List<AccountBank> findAllByIdUser(int id);
 
 
 

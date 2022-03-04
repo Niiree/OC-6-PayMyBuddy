@@ -19,34 +19,34 @@ import com.paymybuddy.app.repository.TransactionRepository;
 
 @Service
 public class TransactionService {
-	
+
 	@Autowired
 	private TransactionRepository transactionRepository;
-	
-	
+
+
 	@Autowired
 	private UserService userService;
-	
-	
+
+
 	public Iterable<Transaction> findAll(){
 		return transactionRepository.findAll();
 	}
-	
+
 	public Transaction findById(int id) {
-		 Optional<Transaction> optional = transactionRepository.findById(id);
-		 if(optional.isPresent()) {
-			 return optional.get();
-		 }else {
-			 throw new RuntimeException("Transaction not found for id "+id);
-		 }
+		Optional<Transaction> optional = transactionRepository.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}else {
+			throw new RuntimeException("Transaction not found for id "+id);
+		}
 	}
-	
+
 	@Transactional
 	public Transaction createTransaction(Transaction transaction) throws Exception {
 		User emitter = userService.getUserConnected();
 		transaction.setEmitter(emitter);
 		User receiver = transaction.getReceiver();
-		
+
 		if(emitter != receiver) {
 			if(receiver.getStatut_active()) {
 				if(emitter.getBalance() - transaction.getBalance() > 0) {
@@ -58,9 +58,9 @@ public class TransactionService {
 					transaction.setIs_account_bank(false);
 					transaction.setStatut_transaction(true);
 					transaction.setId_transaction(hashTransaction());
-					
+
 					return transactionRepository.save(transaction);
-				
+
 				}else {
 					throw new Exception("Not enough money");
 				}	
@@ -71,7 +71,7 @@ public class TransactionService {
 			throw new Exception ("Same user");
 		}	
 	}
-		 
+
 	@Transactional
 	public Transaction createTransactionBank(Transaction transaction) throws Exception {
 		User user = userService.getUserConnected();
@@ -87,25 +87,25 @@ public class TransactionService {
 		}else {
 			throw new Exception("Not enough money on account");
 		}
-		
+
 	}
-	
+
 	private String hashTransaction() throws NoSuchAlgorithmException {
-		 StringBuilder s = new StringBuilder();
+		StringBuilder s = new StringBuilder();
 		List<Transaction> tr;
 		do {
-        String str = LocalDateTime.now().toString();
-        MessageDigest msg = MessageDigest.getInstance("MD5");
-        byte[] hash = msg.digest(str.getBytes(StandardCharsets.UTF_8));
-        for (byte b : hash) {
-            s.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-        }
-        tr = transactionRepository.findByid_Transaction(s.toString());
+			String str = LocalDateTime.now().toString();
+			MessageDigest msg = MessageDigest.getInstance("MD5");
+			byte[] hash = msg.digest(str.getBytes(StandardCharsets.UTF_8));
+			for (byte b : hash) {
+				s.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+			}
+			tr = transactionRepository.findByid_Transaction(s.toString());
 		}while  (!tr.isEmpty());
-        
-        
-        return s.toString();
-		
+
+
+		return s.toString();
+
 	}
 
 

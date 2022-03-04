@@ -11,7 +11,8 @@ import com.paymybuddy.app.models.Transaction;
 
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, Integer>{
-	
+
+	//Return une transaction : ID Transaction
 	@Query(value = "SELECT * FROM transaction u WHERE u.id_transaction = ?1", nativeQuery = true)
 	public List<Transaction> findByid_Transaction(String str);
 

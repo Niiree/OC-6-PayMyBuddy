@@ -15,35 +15,35 @@ import javax.persistence.Table;
 @Entity
 @Table(name="users")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	
+
 	@Column(name="firstname")
 	private String firstName;
-	
+
 	@Column(name="lastname")
 	private String lastName;
-	
+
 	@Column(name="balance")
 	private float balance;
-	
+
 	@Column(name="date_creat")
 	private LocalDateTime date_creation;
-	
+
 	@Column(name="email", unique = true)
 	private String email;
-	
+
 	@Column(name="password")
 	private String Password;
-	
-	@Column(name="statut_Active")
-	private Boolean statut_active;
 
-    @OneToMany
-    private  Set<User> contact;
+	@Column(name="statut_Active")
+	private Boolean statut_active; //TODO A REFACTOR statut_IsActive
+
+	@OneToMany
+	private  Set<User> contact;
 
 
 	/**
@@ -66,7 +66,7 @@ public class User {
 		return id;
 	}
 
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -130,6 +130,6 @@ public class User {
 	public void setStatut_active(Boolean statut_active) {
 		this.statut_active = statut_active;
 	}	
-	
+
 }
 

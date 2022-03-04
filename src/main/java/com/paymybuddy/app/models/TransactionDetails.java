@@ -19,8 +19,7 @@ public class TransactionDetails {
 	@Column(name="libelle",nullable=false)
 	private String libelle;
 	
-	//TODO OneToMany ou ManyToOne
-		
+	//TODO A DELETE?
 	
 	
 }

@@ -12,39 +12,38 @@ import javax.persistence.Table;
 @Entity
 @Table(name="account_bank")
 public class AccountBank {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	
+
 	@OneToOne
 	private User user;
 
-	
 	@Column(name="name",nullable=false)
 	private String name;
-	
+
 	@Column(name="iban",nullable=false)
 	private String iban;
 
 	@Column(name="address")
 	private String address;
-	
+
 	@Column(name="city")
 	private String city;
-	
+
 	@Column(name="zip")
 	private int zip;
-	
+
 	@Column(name ="statut_active")
-	private boolean statut_active;
-	
+	private boolean statut_active; // A refactor sous statut_isActive
+
 	public int getId() {
 		return id;	
-		}
+	}
 
-	
+
 	public String getName() {
 		return name;
 	}
@@ -57,7 +56,7 @@ public class AccountBank {
 	public void setIban(String iban) {
 		this.iban = iban;
 	}
-	
+
 	/**
 	 * @return the address
 	 */
@@ -104,11 +103,14 @@ public class AccountBank {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-	
+
+	/**
+	 * @return return boolean statut
+	 */
 	public boolean getStatutActive() {
 		return statut_active;
 	}
-	
+
 	public void setStatutActive(boolean statut_active){
 		this.statut_active = statut_active;
 	}
@@ -116,10 +118,10 @@ public class AccountBank {
 	public User getUser() {
 		return user;
 	}
-	
+
 	public User setUser(User user) {
 		return this.user = user ;
 	}
-	
+
 
 }

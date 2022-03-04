@@ -15,37 +15,35 @@ import javax.persistence.Table;
 @Table(name="transaction")
 //@Access(AccessType.PROPERTY)
 public class Transaction {
-	
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@OneToOne
 	private User emitter;
-	
+
 	@OneToOne
 	private User receiver;
-	
+
 	@Column(name="balance")
 	private float balance;
-	
+
 	@Column(name="id_transaction")
 	private String id_transaction;
-	
+
 	@Column(name="statut_transaction")
 	private boolean statut_transaction;
-	
+
 	@Column(name="date_transaction")
 	private LocalDateTime date_transaction;
-	
+
 	@Column(name="libelle_perso")
 	private String libelle_perso;
-	
+
 	@Column(name="is_account_bank")
 	private Boolean is_account_bank;
-	
+
 	@OneToOne
 	private AccountBank accountBank; 
 
@@ -63,7 +61,7 @@ public class Transaction {
 	public void setId_transaction(String string) {
 		this.id_transaction = string;
 	}
-	
+
 
 	/**
 	 * @return the accountBank
@@ -207,9 +205,9 @@ public class Transaction {
 	public void setLibelle_perso(String libelle_perso) {
 		this.libelle_perso = libelle_perso;
 	}
-	
-	
-	
 
-	
+
+
+
+
 }

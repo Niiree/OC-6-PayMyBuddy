@@ -16,77 +16,84 @@ import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.UserRepository;
 import com.paymybuddy.app.services.UserService;
 
+
+/*TODO
+ * Remove les repositoru
+ * +disso > controller service
+ * Logger
+ * */
+
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
-	private UserRepository userRepo;
-	
+	private UserRepository userRepo; //TODO A REMOVE
+
 	@Autowired
 	private Security security;
-	
 
-    @GetMapping("/login")
-    public String login() {
-    		return "login";
-    }
- 
-  
-    @GetMapping("/signup")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
-        return "signup_form";
-    }
-	
-    @PostMapping("/process_register")
-    public String processRegister(User user) {
-        userService.saveUser(user);
-        return "signup_success";
-    }
-    
 
-    @GetMapping("/contact")
-    public String userContact(Model model) {
-    	User userConnected = userService.getUserConnected();
-    	Set<User> t = userConnected.getContact();
-        Set<User> listUsers = t;
-        model.addAttribute("listUsers", listUsers);
-    
-        return "user_contact";
-    }
-    
-    
-    @GetMapping("/profil")
-    public String profil(Model model) {
-    	User user = userService.getUserConnected();
-    	model.addAttribute("user", user);
-    	
-    	return "user_profil";
-    }
-    
-    
-    @GetMapping("/addFriend")
-    public String addFriend(Model model){
-    	model.addAttribute("createFriendForm", new User());
-    	return "userContactCreate";
-    }
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 
-    
+	@GetMapping("/signup")
+	public String showRegistrationForm(Model model) {
+		model.addAttribute("user", new User());
+		return "signup_form";
+	}
+
+	@PostMapping("/process_register")
+	public String processRegister(User user) {
+		userService.saveUser(user);
+		return "signup_success";
+	}
+
+
+	@GetMapping("/contact")
+	public String userContact(Model model) {
+		User userConnected = userService.getUserConnected();
+		Set<User> t = userConnected.getContact();
+		Set<User> listUsers = t;
+		model.addAttribute("listUsers", listUsers);
+
+		return "user_contact";
+	}
+
+
+	@GetMapping("/profil")
+	public String profil(Model model) {
+		User user = userService.getUserConnected(); 
+		model.addAttribute("user", user);
+
+		return "user_profil";
+	}
+
+
+	@GetMapping("/addFriend")
+	public String addFriend(Model model){
+		model.addAttribute("createFriendForm", new User());
+		return "userContactCreate";
+	}
+
+
+	//TODO A REFACTOR EN DESSOUS
 	@PostMapping("/addFriend")
 	public String formFriend (String email) {
-	User userConnected = userService.getUserConnected();
-	User userFind = userRepo.findByEmail(email);
-	if(userFind != null && userFind != userConnected) {
-		Set<User> set = userConnected.getContact();
-		set.add(userFind);
-		userConnected.setContact(set);
+		User userConnected = userService.getUserConnected();
+		User userFind = userRepo.findByEmail(email);
+		if(userFind != null && userFind != userConnected) {
+			Set<User> set = userConnected.getContact();
+			set.add(userFind);
+			userConnected.setContact(set);
+		}
+		userRepo.save(userConnected);
+		return "redirect:/contact";
 	}
-	userRepo.save(userConnected);
-	return "redirect:/contact";
-	}
-	
-	
+
+
 }

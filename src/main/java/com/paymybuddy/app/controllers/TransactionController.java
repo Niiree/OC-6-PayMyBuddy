@@ -17,63 +17,68 @@ import com.paymybuddy.app.services.AccountBankService;
 import com.paymybuddy.app.services.TransactionService;
 import com.paymybuddy.app.services.UserService;
 
+/*TODO
+ * Remove les repositoru
+ * +disso > controller service
+ * Logger
+ * */
+
 @Controller
 public class TransactionController {
 
 	@Autowired
 	private TransactionService transactionService;
-	
+
 	@Autowired
 	private AccountBankService accountBankService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
-	private TransactionRepository repository;
-	
-	
+	private TransactionRepository repository; //TODO A REMOVE
+
+
 	@GetMapping("/transactions")
 	public String transaction(Model model) {
 		Iterable<Transaction> transactions = transactionService.findAll();
 		Iterable<AccountBank> bank = accountBankService.findAll();
-		
+
 		model.addAttribute("transactions",transactions);
 		model.addAttribute("bank",bank);
 		return "transactionHistory";
 	}
-	
-    @GetMapping("/createTransfer")
-    public String transactionForm(Model model) {
-        model.addAttribute("createTransferForm",new Transaction());
-      List<User> test = new ArrayList<>(userService.getUserConnected().getContact()); //TODO REFACTOR 
-        model.addAttribute("tests",test);
-    	return "transactionCreate";
-    }
-    
-    @PostMapping("/createTransfer")
-        public String submissionResult(@ModelAttribute("createTransferForm") Transaction transaction) throws Exception {
-        transactionService.createTransaction(transaction);
-        	return "redirect:/transactions";
-    }
-    
-    
-    
-    @GetMapping("/createTransferBank")
-    public String transactionBankForm(Model model) {
-        model.addAttribute("createTransferForm", new Transaction());
-        model.addAttribute("banks",accountBankService.findAllAccountsByIdUser(userService.getUserConnected().getId()));
-    	return "transactionBankCreate";
-    }
-    
-    @PostMapping("/createTransferBank")
-    public String submissionBankResult(@ModelAttribute("createTransferForm") Transaction transaction) throws Exception {
-    		transactionService.createTransactionBank(transaction);
-        return "redirect:/transactions";
-    }
 
-    
-    
-    
-	
+	@GetMapping("/createTransfer")
+	public String transactionForm(Model model) {
+		model.addAttribute("createTransferForm",new Transaction());
+		List<User> test = new ArrayList<>(userService.getUserConnected().getContact()); //TODO REFACTOR 
+		model.addAttribute("tests",test); //TODO A CORRIGER
+		return "transactionCreate";
+	}
+
+	@PostMapping("/createTransfer")
+	public String submissionResult(@ModelAttribute("createTransferForm") Transaction transaction) throws Exception {
+		transactionService.createTransaction(transaction);
+		return "redirect:/transactions";
+	}
+
+
+	@GetMapping("/createTransferBank")
+	public String transactionBankForm(Model model) {
+		model.addAttribute("createTransferForm", new Transaction());
+		model.addAttribute("banks",accountBankService.findAllAccountsByIdUser(userService.getUserConnected().getId()));
+		return "transactionBankCreate";
+	}
+
+	@PostMapping("/createTransferBank")
+	public String submissionBankResult(@ModelAttribute("createTransferForm") Transaction transaction) throws Exception {
+		transactionService.createTransactionBank(transaction);
+		return "redirect:/transactions";
+	}
+
+
+
+
+
 }

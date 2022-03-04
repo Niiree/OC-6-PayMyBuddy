@@ -12,25 +12,30 @@ import com.paymybuddy.app.models.AccountBank;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.AccountBankRepository;
 
+/*TODO 
+ * Logger
+ * Commentaire
+ * */
+
 @Service
 public class AccountBankService {
-	
+
 	@Autowired
 	private AccountBankRepository accountBankRepository;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	private Logger logger;
-	
+
 	public Iterable<AccountBank> findAll(){
 		return accountBankRepository.findAll();
 	}
-	
-	
+
+
 	public AccountBank createUpdateAccountBank(AccountBank accountBank) {
 		User user = userService.getUserConnected(); //TODO Vérifier proprietaire du compte bank
-		
+
 		AccountBank accountBankFind = accountBankRepository.findByIban(accountBank.getIban());
 		if(accountBankFind != null) {
 			accountBankFind.setAddress(accountBank.getAddress());
@@ -44,34 +49,34 @@ public class AccountBankService {
 			return accountBankRepository.save(accountBank);
 		}
 	}
-	
+
 	public void disableAccountBank(int id)  {
 		Optional<AccountBank> accountBankFind = accountBankRepository.findById(id);
 		User user = userService.getUserConnected();
-		
+
 		if(accountBankFind.isPresent()) {
 			if(accountBankFind.get().getUser().getId() == user.getId()) {
-				
-			
-			accountBankFind.get().setStatutActive(false);
-			accountBankRepository.save(accountBankFind.get());
+
+
+				accountBankFind.get().setStatutActive(false);
+				accountBankRepository.save(accountBankFind.get());
 			}else {
 				logger.error("User id != acount user id");
-				
+
 			}
 		}else{
 			logger.info("Account not found");
 		}
 	}
-	
-	public List<AccountBank> findAllAccountsByIdUser(int id){
-	List<AccountBank> account = accountBankRepository.findAllByIdUser(id);
-	return account;
-	}
-	
-	
-	
 
-	
-	
+	public List<AccountBank> findAllAccountsByIdUser(int id){
+		List<AccountBank> account = accountBankRepository.findAllByIdUser(id);
+		return account;
+	}
+
+
+
+
+
+
 }
