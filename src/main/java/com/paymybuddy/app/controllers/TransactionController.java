@@ -35,25 +35,20 @@ public class TransactionController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private TransactionRepository repository; //TODO A REMOVE
-
-
 	@GetMapping("/transactions")
 	public String transaction(Model model) {
-		Iterable<Transaction> transactions = transactionService.findAll();
-		Iterable<AccountBank> bank = accountBankService.findAll();
-
-		model.addAttribute("transactions",transactions);
-		model.addAttribute("bank",bank);
+		Iterable<Transaction> transactionsList = transactionService.findAll();
+		Iterable<AccountBank> bankList = accountBankService.findAll();
+		model.addAttribute("transactions",transactionsList);
+		model.addAttribute("bank",bankList);
 		return "transactionHistory";
 	}
 
 	@GetMapping("/createTransfer")
 	public String transactionForm(Model model) {
 		model.addAttribute("createTransferForm",new Transaction());
-		List<User> test = new ArrayList<>(userService.getUserConnected().getContact()); //TODO REFACTOR 
-		model.addAttribute("tests",test); //TODO A CORRIGER
+		List<User> userList = new ArrayList<>(userService.getUserConnected().getContact());
+		model.addAttribute("users",userList);
 		return "transactionCreate";
 	}
 
@@ -62,7 +57,6 @@ public class TransactionController {
 		transactionService.createTransaction(transaction);
 		return "redirect:/transactions";
 	}
-
 
 	@GetMapping("/createTransferBank")
 	public String transactionBankForm(Model model) {
@@ -76,9 +70,6 @@ public class TransactionController {
 		transactionService.createTransactionBank(transaction);
 		return "redirect:/transactions";
 	}
-
-
-
 
 
 }
