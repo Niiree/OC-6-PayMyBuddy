@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Create transfer</title>
+<title>Transaction</title>
 <link rel="stylesheet" type="text/css" th:href="@{/main.css}"
 	href="../../static/main.css" />
 <link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
@@ -13,7 +13,7 @@
 	<header th:replace="fragments/app-fragments :: header"></header>
 	<nav th:replace="fragments/app-fragments :: navbar"></nav>
 	<div id="transfer-main-content" class="container">
-		<h2>create transaction</h2>
+		<h2>Create transaction</h2>
 
 		<form th:action="@{/createTransfer}" th:object="${createTransferForm}"
 			method="post">
@@ -29,7 +29,7 @@
 					th:text="${user.email}"></option>
 			</select>
 			<p>
-				<input type="submit" value="Submit" />
+				<input class="waves-effect waves-light btn white-text green darken-1" type="submit" value="Submit" />
 			</p>
 		</form>
 	</div>

@@ -12,20 +12,20 @@
 	<nav th:replace="fragments/app-fragments :: navbar"></nav>
 	<div class="container">
 	<h2>Transaction history</h2>
-	<a th:href="@{/createTransfer}" class="blue-text text-darken-2">Create new transaction</a>
-    <a th:href="@{/createTransferBank}" class="blue-text text-darken-2">Create new bank transaction</a>
+	<a th:href="@{/createTransfer}" class="waves-effect waves-light btn white-text green darken-1">New transaction</a>
     <table border = "1">
     <tr>
       <th>id transaction</th>
       <th>Date</th>
       <th>Emitter</th>
       <th>Receiver</th>
-      <th>Libelle</th>
-      <th>Balance</th>
+      <th>Description</th>
+      <th>Amount</th>
     </tr>
     <tr data-th-each="transaction : ${ transactions }">
       <td data-th-text="${ transaction.id_transaction }"></td> 
       <td data-th-text="${ transaction.date_transaction }"></td> 
+      
       <td th:if="${transaction.emitter.id == transaction.receiver.id}" data-th-text="${ transaction.accountBank.name}"></td>
       <td th:if="${transaction.emitter.id == transaction.receiver.id}" data-th-text="${ transaction.emitter.firstName} +' '+ ${transaction.emitter.lastName}">Bank-</td>
            
@@ -34,9 +34,7 @@
     
       <td data-th-text="${ transaction.libelle_perso }"></td>
       
-      <td th:if="${transaction.emitter != transaction.receiver}" data-th-text="${ transaction.receiver.firstName} +' '+ ${ transaction.receiver.lastName }"></td>
-   
-      <td th:if="${transaction.emitter = transaction.receiver}" data-th-text=")${ transaction.balance + ' €'}" ></td>
+      <td th:if="${transaction.emitter = transaction.receiver}" data-th-text="${ transaction.balance}+'€ '" ></td>
     </tr>
     </table>
 

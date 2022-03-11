@@ -20,4 +20,25 @@ body {
 #navbar{
 	box-shadow: none ;
 }
+
+#loginForm{
+	display:inline-block;
+	widht:400px;	
+	margin-top:100px;
+	border: solid grey;
+	border-radius:15px;
+	padding: 10px 130px
+}
+
+#loginForm a{
+	margin-bottom:35px;
+}
+
+#loginForm input{
+	margin: 10px 0px ;
+	
+}
+
+
+
 }

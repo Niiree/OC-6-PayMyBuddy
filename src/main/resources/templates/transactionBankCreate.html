@@ -13,29 +13,23 @@
 	<header th:replace="fragments/app-fragments :: header"></header>
 	<nav th:replace="fragments/app-fragments :: navbar"></nav>
 
-
 	<div id="transfer-main-content" class="container">
-		<h2>Create transaction Bank</h2>
+		<h2>Credit my account</h2>
 
 		<form th:action="@{/createTransferBank}" th:object="${createTransferForm}"
 			method="post">
 
-			<p>Balance <input type="number" th:field="*{balance}" /></p>
-			<p>Libelle <input type="text" th:field="*{libelle_perso}" /></p>
+			<p>Amount<input type="number" th:field="*{balance}" /></p>
+			<p>Description <input type="text" th:field="*{libelle_perso}" /></p>
 			<label>Account Bank</label> <select class="browser-default "
 				th:field="*{accountBank}">
 				<option th:each="bank : ${banks}" th:value="${bank.id}"
 					th:text="${bank.name}"></option>
 			</select>
-
-
 			<p>
 				<input type="submit" value="Submit" />
 			</p>
 		</form>
-
 	</div>
-
-
 </body>
 </html>

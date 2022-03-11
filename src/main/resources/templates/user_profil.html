@@ -3,7 +3,7 @@
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="ISO-8859-1">
-    <title>List Users</title>
+    <title>My profil</title>
     <link rel="stylesheet" type="text/css" th:href="@{/main.css}" href="../../static/main.css" />
 	<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}" href="../../static/materialize.css" />
  	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -17,7 +17,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <h1 th:text="${user.lastName} + ' '+${user.firstName}"></h1>
     </div>
    
-     
+    <a th:href="@{/createTransferBank}" class=" waves-effect waves-light btn white-text green darken-1">Credit my account</a>
+    <a th:href="@{/accountBanks}" class="waves-effect waves-light btn white-text green darken-1">Manage bank account</a>
     <div>
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
