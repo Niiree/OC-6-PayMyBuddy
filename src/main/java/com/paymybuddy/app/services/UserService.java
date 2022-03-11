@@ -1,6 +1,7 @@
 package com.paymybuddy.app.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,22 +45,22 @@ public class UserService {
 	public void addFriend(String email) {
 		User userConnected = this.getUserConnected();
 		User userFind = userRepository.findByEmail(email);
-		//V�rification si l'utilisateur ajout� existe + pas celui connect�
+		//Vérification si l'utilisateur ajouté existe + pas celui connecté
 		if((userFind != null) && (userFind != userConnected)) {
-			Set<User> set = userConnected.getContact();
-			set.add(userFind);
+			List<Integer> set = userConnected.getContact();
+			set.add(userFind.getId());
 			userConnected.setContact(set);
 		}
 		userRepository.save(userConnected);	
 	}
 	
-	//Contact de l'utilisateur connect�
-	public Set<User> getContactUserConnected() {
+	//Contact de l'utilisateur connecté
+	/*public Set<User> getContactUserConnected() {
 		User userConnected = this.getUserConnected();
-		Set<User> userContact = userConnected.getContact();
-		Set<User> listUsers = userContact;
+		List<User> userContact = userConnected.getContact();
+		List<User> listUsers = userContact;
 		return listUsers;
-	}
+	}*/
 	
 	
 	private PasswordEncoder passwordEncoder() {

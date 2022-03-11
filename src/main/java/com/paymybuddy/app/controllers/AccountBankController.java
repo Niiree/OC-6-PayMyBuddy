@@ -55,7 +55,7 @@ public class AccountBankController {
 	@GetMapping("/delete_accountBank/{id}")
 	public String deleteAccountBank(@PathVariable int id) {
 		accountBankService.disableAccountBank(id);
-		return "home";
+		return "/";
 	}
 
 

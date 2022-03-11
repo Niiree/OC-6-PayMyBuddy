@@ -38,6 +38,11 @@ public class TransactionController {
 	public String transaction(Model model) {
 		Iterable<Transaction> transactionsList = transactionService.findAllByUserConnected();
 		Iterable<AccountBank> bankList = accountBankService.findAll();
+		
+		List<User> userList = new ArrayList<>(userService.getUserConnected().getContact());
+
+		model.addAttribute("createTransferForm",new Transaction());
+		model.addAttribute("users",userList);
 		model.addAttribute("transactions",transactionsList);
 		model.addAttribute("bank",bankList);
 		return "transactionHistory";
@@ -51,8 +56,8 @@ public class TransactionController {
 		return "transactionCreate";
 	}
 
-	@PostMapping("/createTransfer")
-	public String submissionResult(@ModelAttribute("createTransferForm") Transaction transaction) throws Exception {
+	@PostMapping("/transactions")
+	public String submissionResult(@ModelAttribute("createTransferForm") Transaction transaction) {
 		transactionService.createTransaction(transaction);
 		return "redirect:/transactions";
 	}

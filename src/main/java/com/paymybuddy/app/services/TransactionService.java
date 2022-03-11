@@ -3,10 +3,10 @@ package com.paymybuddy.app.services;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.paymybuddy.app.models.Transaction;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.TransactionRepository;
-
+import org.apache.logging.log4j.Logger;
 
 @Service
 public class TransactionService {
@@ -23,10 +23,10 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
-
 	@Autowired
 	private UserService userService;
 
+	private Logger logger;
 
 	public Iterable<Transaction> findAll(){
 		return transactionRepository.findAll();
@@ -49,14 +49,14 @@ public class TransactionService {
 	}
 
 	@Transactional
-	public Transaction createTransaction(Transaction transaction) throws Exception {
+	public void createTransaction(Transaction transaction) {
 		User emitter = userService.getUserConnected();
 		transaction.setEmitter(emitter);
 		User receiver = transaction.getReceiver();
-
+			
 		if(emitter != receiver) {
 			if(receiver.getStatut_active()) {
-				if(emitter.getBalance() - transaction.getBalance() > 0) {
+				if( (emitter.getBalance() - transaction.getBalance() > 0) &&  transaction.getBalance() > 0) {
 					emitter.setBalance(emitter.getBalance()-transaction.getBalance());
 					receiver.setBalance(receiver.getBalance()+transaction.getBalance());
 					transaction.setDate_transaction(LocalDateTime.now());
@@ -65,18 +65,10 @@ public class TransactionService {
 					transaction.setIs_account_bank(false);
 					transaction.setStatut_transaction(true);
 					transaction.setId_transaction(hashTransaction());
-
-					return transactionRepository.save(transaction);
-
-				}else {
-					throw new Exception("Not enough money");
-				}	
-			}else {
-				throw new Exception ("User receiver was not active");
+					transactionRepository.save(transaction);
+					}
+				}
 			}
-		}else {
-			throw new Exception ("Same user");
-		}	
 	}
 
 	@Transactional
@@ -97,9 +89,13 @@ public class TransactionService {
 
 	}
 
-	private String hashTransaction() throws NoSuchAlgorithmException {
+	
+	/*Hash de la transaction*/
+	private String hashTransaction() {
 		StringBuilder s = new StringBuilder();
 		List<Transaction> tr;
+		try {
+			
 		do {
 			String str = LocalDateTime.now().toString();
 			MessageDigest msg = MessageDigest.getInstance("MD5");
@@ -109,6 +105,9 @@ public class TransactionService {
 			}
 			tr = transactionRepository.findByid_Transaction(s.toString());
 		}while  (!tr.isEmpty());
+		}catch (NoSuchAlgorithmException e){
+			logger.error(e);
+		}
 
 
 		return s.toString();

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.logging.log4j2.Log4J2LoggingSystem;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.app.models.AccountBank;

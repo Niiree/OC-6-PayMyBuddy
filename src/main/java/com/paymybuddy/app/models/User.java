@@ -2,6 +2,7 @@ package com.paymybuddy.app.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ValueGenerationType;
 
 @Entity
 @Table(name="users")
@@ -42,23 +45,24 @@ public class User {
 	@Column(name="statut_Active")
 	private Boolean statut_active; //TODO A REFACTOR statut_IsActive
 
-	@OneToMany
-	private  Set<User> contact;
+	
+	@Column(name="Friends")
+	private List<Integer> friendConnection;
 
 
 	/**
 	 * @return the contact
 	 */
-	public Set<User> getContact() {
-		return contact;
+	public List<Integer> getContact() {
+		return friendConnection;
 	}
 
 
 	/**
 	 * @param contact the contact to set
 	 */
-	public void setContact(Set<User> contact) {
-		this.contact = contact;
+	public void setContact(List<Integer> contact) {
+		this.friendConnection = contact;
 	}
 
 
