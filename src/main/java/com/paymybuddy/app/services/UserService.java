@@ -1,6 +1,7 @@
 package com.paymybuddy.app.services;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -40,25 +41,26 @@ public class UserService {
 		return userRepository.findByEmail(authentification.getName());	    
 	} 
 	
-	public addFriend(String email) {
-		User userConnected = userService.getUserConnected();
-		User userFind = userRepo.findByEmail(email);
-		//Vérification si l'utilisateur ajouté existe + pas celui connecté
+	public void addFriend(String email) {
+		User userConnected = this.getUserConnected();
+		User userFind = userRepository.findByEmail(email);
+		//Vï¿½rification si l'utilisateur ajoutï¿½ existe + pas celui connectï¿½
 		if((userFind != null) && (userFind != userConnected)) {
 			Set<User> set = userConnected.getContact();
 			set.add(userFind);
 			userConnected.setContact(set);
 		}
-		userRepo.save(userConnected);	
+		userRepository.save(userConnected);	
 	}
 	
-	//Contact de l'utilisateur connecté
-	public Set<USer> getContactUserConnected() {
-		User userConnected = userService.getUserConnected();
+	//Contact de l'utilisateur connectï¿½
+	public Set<User> getContactUserConnected() {
+		User userConnected = this.getUserConnected();
 		Set<User> userContact = userConnected.getContact();
 		Set<User> listUsers = userContact;
 		return listUsers;
 	}
+	
 	
 	private PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();	

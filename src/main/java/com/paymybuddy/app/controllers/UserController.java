@@ -61,7 +61,7 @@ public class UserController {
 
 	@GetMapping("/profil")
 	public String profil(Model model) {
-		model.addAttribute("user", userService.getUserConnected(); );
+		model.addAttribute("user", userService.getUserConnected());
 		return "user_profil";
 	}
 

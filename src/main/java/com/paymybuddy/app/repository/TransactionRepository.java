@@ -16,4 +16,8 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 	@Query(value = "SELECT * FROM transaction u WHERE u.id_transaction = ?1", nativeQuery = true)
 	public List<Transaction> findByid_Transaction(String str);
 
+	@Query(value = "SELECT * FROM transaction u WHERE u.emitter_id = ?1 or u.receiver_id = ?1", nativeQuery = true)
+	public List<Transaction> findAllTransactionByIdUser(int id);
+
+	
 }

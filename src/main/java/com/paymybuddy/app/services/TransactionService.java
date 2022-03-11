@@ -40,6 +40,13 @@ public class TransactionService {
 			throw new RuntimeException("Transaction not found for id "+id);
 		}
 	}
+	
+	
+	public Iterable<Transaction> findAllByUserConnected(){
+		User user = userService.getUserConnected();
+		return transactionRepository.findAllTransactionByIdUser(user.getId());
+		
+	}
 
 	@Transactional
 	public Transaction createTransaction(Transaction transaction) throws Exception {

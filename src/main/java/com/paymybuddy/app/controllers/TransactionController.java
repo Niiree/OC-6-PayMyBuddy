@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.paymybuddy.app.models.AccountBank;
 import com.paymybuddy.app.models.Transaction;
 import com.paymybuddy.app.models.User;
-import com.paymybuddy.app.repository.TransactionRepository;
 import com.paymybuddy.app.services.AccountBankService;
 import com.paymybuddy.app.services.TransactionService;
 import com.paymybuddy.app.services.UserService;
@@ -37,7 +36,7 @@ public class TransactionController {
 
 	@GetMapping("/transactions")
 	public String transaction(Model model) {
-		Iterable<Transaction> transactionsList = transactionService.findAll();
+		Iterable<Transaction> transactionsList = transactionService.findAllByUserConnected();
 		Iterable<AccountBank> bankList = accountBankService.findAll();
 		model.addAttribute("transactions",transactionsList);
 		model.addAttribute("bank",bankList);
