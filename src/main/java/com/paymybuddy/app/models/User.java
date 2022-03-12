@@ -7,11 +7,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.ValueGenerationType;
 
@@ -45,24 +48,33 @@ public class User {
 	@Column(name="statut_Active")
 	private Boolean statut_active; //TODO A REFACTOR statut_IsActive
 
+
 	
-	@Column(name="Friends")
-	private List<Integer> friendConnection;
+    @JoinTable(name="connections", joinColumns = {
+            @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "friend_id", referencedColumnName = "id", nullable = false)
+    })
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<User> friendlist;
+
+
+
 
 
 	/**
-	 * @return the contact
+	 * @return the listFriend
 	 */
-	public List<Integer> getContact() {
-		return friendConnection;
+	public List<User> getListFriend() {
+		return friendlist;
 	}
 
 
 	/**
-	 * @param contact the contact to set
+	 * @param listFriend the listFriend to set
 	 */
-	public void setContact(List<Integer> contact) {
-		this.friendConnection = contact;
+	public void setListFriend(List<User> listFriend) {
+		this.friendlist = listFriend;
 	}
 
 

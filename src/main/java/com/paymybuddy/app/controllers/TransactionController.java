@@ -39,7 +39,7 @@ public class TransactionController {
 		Iterable<Transaction> transactionsList = transactionService.findAllByUserConnected();
 		Iterable<AccountBank> bankList = accountBankService.findAll();
 		
-		List<User> userList = new ArrayList<>(userService.getUserConnected().getContact());
+		List<User> userList = new ArrayList<>(userService.getUserConnected().getListFriend());
 
 		model.addAttribute("createTransferForm",new Transaction());
 		model.addAttribute("users",userList);
@@ -51,7 +51,7 @@ public class TransactionController {
 	@GetMapping("/createTransfer")
 	public String transactionForm(Model model) {
 		model.addAttribute("createTransferForm",new Transaction());
-		List<User> userList = new ArrayList<>(userService.getUserConnected().getContact());
+		List<User> userList = new ArrayList<>(userService.getUserConnected().getListFriend());
 		model.addAttribute("users",userList);
 		return "transactionCreate";
 	}

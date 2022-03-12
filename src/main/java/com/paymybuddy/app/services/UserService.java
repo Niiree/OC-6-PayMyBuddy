@@ -47,20 +47,20 @@ public class UserService {
 		User userFind = userRepository.findByEmail(email);
 		//Vérification si l'utilisateur ajouté existe + pas celui connecté
 		if((userFind != null) && (userFind != userConnected)) {
-			List<Integer> set = userConnected.getContact();
-			set.add(userFind.getId());
-			userConnected.setContact(set);
+			List<User> set = userConnected.getListFriend();
+			set.add(userFind);
+			userConnected.setListFriend(set);
 		}
 		userRepository.save(userConnected);	
 	}
 	
 	//Contact de l'utilisateur connecté
-	/*public Set<User> getContactUserConnected() {
+	public List<User> getContactUserConnected() {
 		User userConnected = this.getUserConnected();
-		List<User> userContact = userConnected.getContact();
+		List<User> userContact = userConnected.getListFriend();
 		List<User> listUsers = userContact;
 		return listUsers;
-	}*/
+	}
 	
 	
 	private PasswordEncoder passwordEncoder() {
