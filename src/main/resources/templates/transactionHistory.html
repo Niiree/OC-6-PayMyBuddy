@@ -64,7 +64,7 @@
 			</tr>
 			<tr data-th-each="transaction : ${ transactions }">
 				<td data-th-text="${ transaction.id_transaction }"></td>
-				<td data-th-text="${#temporals.year(transaction.date_transaction)}+'-'+${#temporals.month(transaction.date_transaction)} +'-'+${#temporals.day(transaction.date_transaction)} "></td>
+				<td data-th-text="${#temporals.day(transaction.date_transaction)}+'-'+${#temporals.month(transaction.date_transaction)} +'-'+${#temporals.year(transaction.date_transaction)} "></td>
 				
 				<td th:if="${transaction.emitter.id == transaction.receiver.id}"
 					data-th-text="${ transaction.accountBank.name}"></td>
