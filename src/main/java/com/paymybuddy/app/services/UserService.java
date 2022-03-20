@@ -2,7 +2,7 @@ package com.paymybuddy.app.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -63,8 +63,14 @@ public class UserService {
 	}
 	
 	
+	public User findByEmail(String email){
+		return userRepository.findByEmail(email);
+	}
+	
 	private PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();	
 	}
+	
+	
 
 }

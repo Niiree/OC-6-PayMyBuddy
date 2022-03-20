@@ -49,7 +49,7 @@ public class AccountBankController {
 	@PostMapping("/accountBank")
 	public String submissionResult(@ModelAttribute("personForm") AccountBank accountBank,HttpServletRequest request) {
 		accountBankService.createUpdateAccountBank(accountBank);
-		return "redirect:/home";
+		return "redirect:/";
 	}
 
 	@GetMapping("/delete_accountBank/{id}")

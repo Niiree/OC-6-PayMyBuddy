@@ -1,17 +1,14 @@
 package com.paymybuddy.app.controllers;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.paymybuddy.app.configuration.Security;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.UserRepository;
 import com.paymybuddy.app.services.UserService;
@@ -30,10 +27,6 @@ public class UserController {
 	private UserService userService;
 
 
-	@Autowired
-	private Security security;
-
-
 	@GetMapping("/login")
 	public String login() {
 		return "login";
@@ -46,7 +39,14 @@ public class UserController {
 	}
 
 	@PostMapping("/process_register")
-	public String processRegister(User user) {
+	public String processRegister(@Valid User user,BindingResult result) {
+		user = userService.findByEmail(user.getEmail());
+		if(user != null ) {
+			result.rejectValue("email", "error.email","You cannot use this email !");
+			return "signup_form";
+		}else if(result.hasErrors()) {
+		return "signup_form";	
+		}
 		userService.saveUser(user);
 		return "signup_success";
 	}

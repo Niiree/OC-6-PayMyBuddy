@@ -2,9 +2,14 @@ package com.paymybuddy.app.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +63,9 @@ public class TransactionController {
 
 	@PostMapping("/transactions")
 	public String submissionResult(@ModelAttribute("createTransferForm") Transaction transaction) {
+
 		transactionService.createTransaction(transaction);
+		
 		return "redirect:/transactions";
 	}
 
@@ -70,9 +77,13 @@ public class TransactionController {
 	}
 
 	@PostMapping("/createTransferBank")
-	public String submissionBankResult(@ModelAttribute("createTransferForm") Transaction transaction) throws Exception {
+	public String submissionBankResult(@Valid @ModelAttribute("createTransferForm") Transaction transaction,BindingResult result) throws Exception {
+		if(result.hasErrors()) {
+			return "transactionBankCreate";
+		}else {
 		transactionService.createTransactionBank(transaction);
 		return "redirect:/transactions";
+		}
 	}
 
 
