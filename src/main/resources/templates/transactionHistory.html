@@ -1,63 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8">
-    <title>Transactions</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+<head>
+<meta charset="UTF-8">
+<title>Transactions</title>
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}"
 	href="../../static/main.css" />
-	<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}">
-  </head>
-  <body>
-  <header th:replace="fragments/app-fragments :: header"></header>
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}">
+</head>
+<body>
+	<header th:replace="fragments/app-fragments :: header"></header>
 	<nav th:replace="fragments/app-fragments :: navbar"></nav>
 	<div class="container">
-	<h2>Send Money</h2>
-	     <a th:href="@{/addFriend}" class="waves-effect waves-light btn white-text #43a047 blue darken-1">Add connection</a>
+		<h2>Send Money</h2>
+		<a th:href="@{/addFriend}"
+			class="waves-effect waves-light btn white-text #43a047 blue darken-1">Add
+			connection</a>
 		<form th:action="@{/transactions}" th:object="${createTransferForm}"
 			method="post">
-			
-			
-  <div class="row">
-    <div class="col s12 m4 l2"><label>Connection</label> <select class="browser-default "
-				th:field="*{receiver}">		
-				<option th:each="user : ${users}" th:value="${user.id}"
-					th:text="${user.email}"></option></select></div>
-    <div class="col s12 m4 l2"><p>Balance <input type="number" th:field="*{balance}" /></p>
-      <p  th:if="${#fields.hasErrors('balance')}" th:class="${#fields.hasErrors('balance')}? error">
-  Invalid Age</p></div>
-    <div class="col s12 m4 l2"><p>Libelle <input type="text" th:field="*{libelle_perso}" /></p></div>
-    <div class="col s12 m4 5"><p><input class="waves-effect waves-light btn white-text green darken-1" type="submit" value="Pay" /></p></div>
-  </div>	
+
+
+			<div class="row">
+				<div class="col s12 m4 l2">
+					<p>Connection</p>
+					<select class="browser-default " th:field="*{receiver}">
+						<option th:each="user : ${users}" th:value="${user.id}"
+							th:text="${user.email}"></option>
+					</select>
+				</div>
+				<div class="col s12 m4 l2">
+					<p>
+						Balance <input type="number" th:field="*{balance}" />
+					</p>
+					<span th:if="${#fields.hasErrors('balance')}"
+						th:errors="*{balance}" th:errorclass="error"></span>
+
+
+				</div>
+				<div class="col s12 m4 l2">
+					<p>
+						Libelle <input type="text" th:field="*{libelle_perso}" />
+					</p>
+				</div>
+				<div class="col s12 m4 5">
+					<p>
+						<input
+							class="waves-effect waves-light btn white-text green darken-1"
+							type="submit" value="Pay" />
+					</p>
+				</div>
+			</div>
 		</form>
-		
-		
-		
-    <table border = "1">
-    <tr>
-      <th>id transaction</th>
-      <th>Date</th>
-      <th>Emitter</th>
-      <th>Receiver</th>
-      <th>Description</th>
-      <th>Amount</th>
-    </tr>
-    <tr data-th-each="transaction : ${ transactions }">
-      <td data-th-text="${ transaction.id_transaction }"></td> 
-      <td data-th-text="${ transaction.date_transaction }"></td> 
-      
-      <td th:if="${transaction.emitter.id == transaction.receiver.id}" data-th-text="${ transaction.accountBank.name}"></td>
-      <td th:if="${transaction.emitter.id == transaction.receiver.id}" data-th-text="${ transaction.emitter.firstName} +' '+ ${transaction.emitter.lastName}">Bank-</td>
-           
-      <td th:if="${transaction.emitter != transaction.receiver}" data-th-text="${ transaction.emitter.firstName} +' '+ ${ transaction.emitter.lastName }"></td>
-      <td th:if="${transaction.emitter != transaction.receiver}" data-th-text="${ transaction.receiver.firstName} +' '+ ${ transaction.receiver.lastName }"></td>
-    
-      <td data-th-text="${ transaction.libelle_perso }"></td>
-      
-      <td th:if="${transaction.emitter = transaction.receiver}" data-th-text="${ transaction.balance}+'€ '" ></td>
-    </tr>
-    </table>
 
 
-    </div>
-  </body>
+
+		<table border="1">
+			<tr>
+				<th>id transaction</th>
+				<th>Date</th>
+				<th>Emitter</th>
+				<th>Receiver</th>
+				<th>Description</th>
+				<th>Amount</th>
+			</tr>
+			<tr data-th-each="transaction : ${ transactions }">
+				<td data-th-text="${ transaction.id_transaction }"></td>
+				<td data-th-text="${ transaction.date_transaction }"></td>
+
+				<td th:if="${transaction.emitter.id == transaction.receiver.id}"
+					data-th-text="${ transaction.accountBank.name}"></td>
+				<td th:if="${transaction.emitter.id == transaction.receiver.id}"
+					data-th-text="${ transaction.emitter.firstName} +' '+ ${transaction.emitter.lastName}">Bank-</td>
+
+				<td th:if="${transaction.emitter != transaction.receiver}"
+					data-th-text="${ transaction.emitter.firstName} +' '+ ${ transaction.emitter.lastName }"></td>
+				<td th:if="${transaction.emitter != transaction.receiver}"
+					data-th-text="${ transaction.receiver.firstName} +' '+ ${ transaction.receiver.lastName }"></td>
+
+				<td data-th-text="${ transaction.libelle_perso }"></td>
+
+				<td th:if="${transaction.emitter = transaction.receiver}"
+					data-th-text="${ transaction.balance}+'€ '"></td>
+			</tr>
+		</table>
+
+
+	</div>
+</body>
 </html>
