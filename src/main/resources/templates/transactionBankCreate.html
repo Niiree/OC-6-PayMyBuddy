@@ -19,7 +19,10 @@
 		<form th:action="@{/createTransferBank}" th:object="${createTransferForm}"
 			method="post">
 
-			<p>Amount<input type="number" th:field="*{balance}" /></p>
+			<p>Amount<input type="number" th:field="*{balance}"/></p>
+			
+			<span th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"th:errorclass="error" ></span>
+			
 			<p>Description <input type="text" th:field="*{libelle_perso}" /></p>
 			<label>Account Bank</label> <select class="browser-default "
 				th:field="*{accountBank}">

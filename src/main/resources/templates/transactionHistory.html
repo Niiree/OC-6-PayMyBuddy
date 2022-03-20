@@ -22,9 +22,11 @@
 				th:field="*{receiver}">		
 				<option th:each="user : ${users}" th:value="${user.id}"
 					th:text="${user.email}"></option></select></div>
-    <div class="col s12 m4 l2"><p>Balance <input type="number" th:field="*{balance}" /></p></div>
+    <div class="col s12 m4 l2"><p>Balance <input type="number" th:field="*{balance}" /></p>
+      <p  th:if="${#fields.hasErrors('balance')}" th:class="${#fields.hasErrors('balance')}? error">
+  Invalid Age</p></div>
     <div class="col s12 m4 l2"><p>Libelle <input type="text" th:field="*{libelle_perso}" /></p></div>
-      <div class="col s12 m4 5"><p><input class="waves-effect waves-light btn white-text green darken-1" type="submit" value="Pay" /></p></div>
+    <div class="col s12 m4 5"><p><input class="waves-effect waves-light btn white-text green darken-1" type="submit" value="Pay" /></p></div>
   </div>	
 		</form>
 		
