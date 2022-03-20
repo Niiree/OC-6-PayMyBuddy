@@ -82,8 +82,18 @@
 					data-th-text="${ transaction.balance}+'€ '"></td>
 			</tr>
 		</table>
+<div class="pagination" th:if="${transactions.totalPages > 0}">
+<ul>
+    <li  th:each="pageNumber : ${pageNumbers}" class ="waves-effect" th:class="${pageNumber==transactions.number + 1} ? active" >
+    	<a th:href="@{/transactions(size=${transactions.size}, page=${pageNumber})}"th:text=${pageNumber}></a>
+    </li>
+</ul>
+</div>
 
 
+  
 	</div>
+	
+	
 </body>
 </html>

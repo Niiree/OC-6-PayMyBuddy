@@ -9,12 +9,18 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paymybuddy.app.models.Transaction;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.TransactionRepository;
+
+import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
+
 import org.apache.logging.log4j.Logger;
 
 @Service
@@ -42,11 +48,20 @@ public class TransactionService {
 	}
 	
 	
-	public Iterable<Transaction> findAllByUserConnected(){
+	
+	
+	public Page<Transaction> findAllByUserConnected(){
 		User user = userService.getUserConnected();
-		return transactionRepository.findAllTransactionByIdUser(user.getId());
-		
+		//return transactionRepository.findAllTransactionByIdUser(user.getId());
+		return transactionRepository.pageableFindAllTransactionByIdUser(user.getId(),PageRequest.of(0, 3));	
 	}
+	
+	public Page<Transaction> pageFindAllByUserConnected(int one, int two){
+		User user = userService.getUserConnected();
+		//return transactionRepository.findAllTransactionByIdUser(user.getId());
+		return transactionRepository.pageableFindAllTransactionByIdUser(user.getId(),PageRequest.of( one, two));	
+	}
+
 
 	@Transactional
 	public void createTransaction(Transaction transaction) {
@@ -113,6 +128,9 @@ public class TransactionService {
 		return s.toString();
 
 	}
+	
+	
+	
 
 
 }

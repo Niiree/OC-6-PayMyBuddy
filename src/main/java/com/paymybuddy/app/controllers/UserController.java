@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.paymybuddy.app.models.User;
-import com.paymybuddy.app.repository.UserRepository;
 import com.paymybuddy.app.services.UserService;
 
 
