@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import javax.persistence.*;
 
 import org.hibernate.annotations.ValueGenerationType;
@@ -27,9 +29,14 @@ public class User {
 	@Column(name="id")
 	private int id;
 
+	
+	@NotBlank
+	@Size(min = 3, message ="The first name must contain at least 3 characters")
 	@Column(name="firstname")
 	private String firstName;
 
+	@NotBlank
+	@Size(min = 3, message ="The first name must contain at least 3 characters")
 	@Column(name="lastname")
 	private String lastName;
 
@@ -39,9 +46,12 @@ public class User {
 	@Column(name="date_creat")
 	private LocalDateTime date_creation;
 
+	@NotBlank(message ="cann't be null")
 	@Column(name="email", unique = true)
 	private String email;
 
+	@NotBlank
+	@Size(min = 6, message ="The password must contain at least 6 characters")
 	@Column(name="password")
 	private String Password;
 

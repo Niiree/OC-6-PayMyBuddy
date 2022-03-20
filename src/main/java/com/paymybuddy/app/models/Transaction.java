@@ -1,6 +1,5 @@
 package com.paymybuddy.app.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name="transaction")
@@ -25,7 +25,9 @@ public class Transaction {
 	@OneToOne
 	private User receiver;
 
+
 	@Column(name="balance")
+	@Range(min = 0, message = "Please enter an amount greater than 0.")
 	private float balance;
 
 	@Column(name="id_transaction")
