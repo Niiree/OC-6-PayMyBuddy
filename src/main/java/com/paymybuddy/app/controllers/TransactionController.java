@@ -46,86 +46,73 @@ public class TransactionController {
 
 	@Autowired
 	private AccountBankService accountBankService;
-	
+
 	@Autowired
 	private TransactionRepository trepo;
 
 	@Autowired
 	private UserService userService;
 
-
-
 	@GetMapping("/createTransfer")
 	public String transactionForm(Model model) {
-		model.addAttribute("createTransferForm",new Transaction());
+		model.addAttribute("createTransferForm", new Transaction());
 		List<User> userList = new ArrayList<>(userService.getUserConnected().getListFriend());
-		model.addAttribute("users",userList);
-		return "transactionCreate";
+		model.addAttribute("users", userList);
+		return "transaction/transactionCreate";
 	}
-	
-	
-	@GetMapping("/transactions")
-	public String transaction(Model model ,@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(6);
-		
-	    Page<Transaction> e = transactionService.pageFindAllByUserConnected(currentPage - 1,pageSize);
-	    
-	    int totalPages = e.getTotalPages();
-		model.addAttribute("totalPages",totalPages);
 
-        List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                .boxed()
-                .collect(Collectors.toList());
-        model.addAttribute("pageNumbers", pageNumbers);
-		
+	@GetMapping("/transactions")
+	public String transaction(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(6);
+
+		Page<Transaction> e = transactionService.pageFindAllByUserConnected(currentPage - 1, pageSize, false);
+		User idUser = userService.getUserConnected();
+		int totalPages = e.getTotalPages();
+
+		model.addAttribute("totalPages", totalPages);
+
+		List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+		model.addAttribute("pageNumbers", pageNumbers);
+
 		Iterable<AccountBank> bankList = accountBankService.findAll();
 		List<User> userList = new ArrayList<>(userService.getUserConnected().getListFriend());
 
-		model.addAttribute("createTransferForm",new Transaction());
-		model.addAttribute("users",userList);
-		model.addAttribute("transactions",e);
-		model.addAttribute("bank",bankList);
-		return "transactionHistory";
+		model.addAttribute("createTransferForm", new Transaction());
+		model.addAttribute("users", userList);
+		model.addAttribute("idUser");
+		model.addAttribute("transactions", e);
+		model.addAttribute("bank", bankList);
+		return "transaction/transactions";
 	}
 
 	@PostMapping("/transactions")
-	public String submissionResult(@Valid @ModelAttribute("createTransferForm") Transaction transaction,BindingResult result,Model model) {
-		if(result.hasErrors()) {
-			
-			Iterable<Transaction> transactionsList = transactionService.findAllByUserConnected();
-			Iterable<AccountBank> bankList = accountBankService.findAll();
-			
-			List<User> userList = new ArrayList<>(userService.getUserConnected().getListFriend());
-
-			model.addAttribute("createTransferForm",new Transaction());
-			model.addAttribute("users",userList);
-			model.addAttribute("transactions",transactionsList);
-			model.addAttribute("bank",bankList);
-			return "transactionHistory";
-
+	public String submissionResult(@Valid @ModelAttribute("createTransferForm") Transaction transaction,
+			BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "transaction/transactions";
 		}
 		transactionService.createTransaction(transaction);
-		
+
 		return "redirect:/transactions";
 	}
 
-	@GetMapping("/createTransferBank")
-	public String transactionBankForm(Model model) {
+	@GetMapping("/bank")
+	public String transactionBankSendkForm(Model model) {
 		model.addAttribute("createTransferForm", new Transaction());
-		model.addAttribute("banks",accountBankService.findAllAccountsByIdUser(userService.getUserConnected().getId()));
-		return "transactionBankCreate";
+		model.addAttribute("banks", accountBankService.findAllAccountsByIdUser(userService.getUserConnected().getId()));
+		return "transaction/transactionBankCreate";
 	}
 
-	@PostMapping("/createTransferBank")
-	public String submissionBankResult(@Valid @ModelAttribute("createTransferForm") Transaction transaction,BindingResult result) throws Exception {
-		if(result.hasErrors()) {
-			return "transactionBankCreate";
-		}else {
+	@PostMapping("/bankTransaction")
+	public String submissionBankSend(@Valid @ModelAttribute("createTransferForm") Transaction transaction,
+			BindingResult result) throws Exception {
 		transactionService.createTransactionBank(transaction);
-		return "redirect:/transactions";
-		}
+		return "redirect:/profil";
 	}
+	
+
 
 
 }

@@ -17,7 +17,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <h1 th:text="${user.lastName} + ' '+${user.firstName}"></h1>
     </div>
    
-    <a th:href="@{/createTransferBank}" class=" waves-effect waves-light btn white-text green darken-1">Credit my account</a>
+
+    <a th:href="@{/bank}" class=" waves-effect waves-light btn white-text green darken-1"> bank</a>
     <a th:href="@{/accountBanks}" class="waves-effect waves-light btn white-text green darken-1">Manage bank account</a>
     <div>
         <table class="table table-striped table-bordered">
@@ -37,9 +38,35 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     <td th:text="${user.balance} + ' €'"> Balance </td>
                 </tr>
             </tbody>
-        </table>
+        </table>  
         
     </div>
+    
+    		<table border="1">
+			<tr>
+				<th>id transaction</th>
+				<th>Date</th>
+				<th>Emitter</th>
+				<th>Receiver</th>
+				<th>Description</th>
+				<th>Amount</th>
+		
+			</tr>
+			<tr data-th-each="transaction : ${ transactions }">
+				<td data-th-text="${ transaction.id_transaction }"></td>
+				<td data-th-text="${#temporals.day(transaction.date_transaction)}+'/'+${#temporals.month(transaction.date_transaction)} +'/'+${#temporals.year(transaction.date_transaction)} "></td>
+				
+				<td data-th-text="${ transaction.accountBank.name}"></td>
+				<td data-th-text="${ transaction.emitter.firstName} +' '+ ${transaction.emitter.lastName}">Bank-</td>
+
+
+				<td data-th-text="${ transaction.libelle_perso }"></td>
+
+				<td data-th-text="${ transaction.balance}+'€ '"></td>
+				<td th:if="${transaction.emitter ==  idUser}"  data-th-text="${ transaction.taxe}+'€ '"></td>
+			
+			</tr>
+		</table>
 </div>
 </body>
 </html>

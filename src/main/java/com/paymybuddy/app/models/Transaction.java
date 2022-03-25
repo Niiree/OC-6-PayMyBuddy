@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name="transaction")
@@ -27,7 +26,6 @@ public class Transaction {
 
 
 	@Column(name="balance")
-	@Range(min = 0, message = "Please enter an amount greater than 0.")
 	private float balance;
 
 	@Column(name="id_transaction")
@@ -47,6 +45,25 @@ public class Transaction {
 
 	@OneToOne
 	private AccountBank accountBank; 
+	
+	
+	@Column(name="taxe")
+	private double taxe;
+
+	/**
+	 * @return the taxe
+	 */
+	public double getTaxe() {
+		return taxe;
+	}
+
+
+	/**
+	 * @param taxe2 the taxe to set
+	 */
+	public void setTaxe(double taxe) {
+		this.taxe = taxe;
+	}
 
 	/**
 	 * @return the id_transaction

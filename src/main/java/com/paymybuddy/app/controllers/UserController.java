@@ -1,15 +1,24 @@
 package com.paymybuddy.app.controllers;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.paymybuddy.app.models.Transaction;
 import com.paymybuddy.app.models.User;
+import com.paymybuddy.app.services.TransactionService;
 import com.paymybuddy.app.services.UserService;
 
 
@@ -22,9 +31,13 @@ import com.paymybuddy.app.services.UserService;
 @Controller
 public class UserController {
 
+
+
 	@Autowired
 	private UserService userService;
 
+	@Autowired 
+	private TransactionService transactionService;
 
 	@GetMapping("/login")
 	public String login() {
@@ -59,7 +72,20 @@ public class UserController {
 
 
 	@GetMapping("/profil")
-	public String profil(Model model) {
+	public String profil(Model model,@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(6);
+
+	    Page<Transaction> transactions = transactionService.pageFindAllByUserConnected(currentPage-1,pageSize,true);
+	    int totalPages = transactions.getTotalPages();
+		model.addAttribute("totalPages",totalPages);
+		
+        List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+        model.addAttribute("pageNumbers", pageNumbers);
+ 
+
+		model.addAttribute("transactions",transactions);
+		
 		model.addAttribute("user", userService.getUserConnected());
 		return "user_profil";
 	}

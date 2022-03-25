@@ -22,8 +22,12 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 	@Query(value = "SELECT * FROM transaction u WHERE u.emitter_id = ?1 or u.receiver_id = ?1", nativeQuery = true)
 	public List<Transaction> findAllTransactionByIdUser(int id);
 	
-	@Query(value = "SELECT * FROM transaction u WHERE u.emitter_id = ?1 or u.receiver_id = ?1",countQuery= "SELECT count(*) FROM transaction u WHERE u.emitter_id = ?1 or u.receiver_id = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM transaction u WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = false  ",countQuery= "SELECT count(*) FROM transaction u  WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = false ", nativeQuery = true)
 	public Page<Transaction> pageableFindAllTransactionByIdUser(int idUser,Pageable pageable);
 	
-
+	
+	@Query(value = "SELECT * FROM transaction u WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = true  ",countQuery= "SELECT count(*) FROM transaction u  WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = true ", nativeQuery = true)
+	public Page<Transaction> pageableFindAllBankTransactionByIdUser(int idUser,Pageable pageable);
+	
+	
 }
