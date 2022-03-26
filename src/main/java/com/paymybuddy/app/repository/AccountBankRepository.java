@@ -19,5 +19,4 @@ public interface AccountBankRepository extends CrudRepository<AccountBank, Integ
 	public List<AccountBank> findAllByIdUser(int id);
 
 
-
 }

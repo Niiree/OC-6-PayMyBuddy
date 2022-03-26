@@ -22,15 +22,8 @@ import com.paymybuddy.app.services.TransactionService;
 import com.paymybuddy.app.services.UserService;
 
 
-/*TODO
- * Remove les repositoru
- * +disso > controller service
- * Logger
- * */
-
 @Controller
 public class UserController {
-
 
 
 	@Autowired
@@ -52,12 +45,12 @@ public class UserController {
 
 	@PostMapping("/process_register")
 	public String processRegister(@Valid User user,BindingResult result) {
-		user = userService.findByEmail(user.getEmail());
-		if(user != null ) {
+		User searchUser = userService.findByEmail(user.getEmail());
+		if(searchUser != null ) {
 			result.rejectValue("email", "error.email","You cannot use this email !");
 			return "signup_form";
 		}else if(result.hasErrors()) {
-		return "signup_form";	
+			return "signup_form";	
 		}
 		userService.saveUser(user);
 		return "signup_success";
@@ -73,19 +66,17 @@ public class UserController {
 
 	@GetMapping("/profil")
 	public String profil(Model model,@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(6);
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(6);
 
-	    Page<Transaction> transactions = transactionService.pageFindAllByUserConnected(currentPage-1,pageSize,true);
-	    int totalPages = transactions.getTotalPages();
+		Page<Transaction> transactions = transactionService.pageFindAllByUserConnected(currentPage-1,pageSize,true);
+		int totalPages = transactions.getTotalPages();
 		model.addAttribute("totalPages",totalPages);
-		
-        List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-        model.addAttribute("pageNumbers", pageNumbers);
- 
+
+		List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+		model.addAttribute("pageNumbers", pageNumbers);
 
 		model.addAttribute("transactions",transactions);
-		
 		model.addAttribute("user", userService.getUserConnected());
 		return "user_profil";
 	}

@@ -15,11 +15,7 @@ import com.paymybuddy.app.models.AccountBank;
 import com.paymybuddy.app.services.AccountBankService;
 import com.paymybuddy.app.services.UserService;
 
-/* TODO 
- * Logger 
- * Refactor +disociation => Controller Service 
- * Commentaire
- * */
+
 
 @Controller
 public class AccountBankController {
@@ -38,7 +34,6 @@ public class AccountBankController {
 		}
 		return "accountBankList";
 	}
-
 
 	@GetMapping("/createAccountBank")
 	public String accountBankForm(Model model) {

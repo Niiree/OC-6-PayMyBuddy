@@ -45,187 +45,114 @@ public class Transaction {
 
 	@OneToOne
 	private AccountBank accountBank; 
-	
-	
+
+
 	@Column(name="taxe")
 	private double taxe;
 
-	/**
-	 * @return the taxe
-	 */
+
 	public double getTaxe() {
 		return taxe;
 	}
 
 
-	/**
-	 * @param taxe2 the taxe to set
-	 */
 	public void setTaxe(double taxe) {
 		this.taxe = taxe;
 	}
 
-	/**
-	 * @return the id_transaction
-	 */
+
 	public String getId_transaction() {
 		return id_transaction;
 	}
 
 
-	/**
-	 * @param string the id_transaction to set
-	 */
 	public void setId_transaction(String string) {
 		this.id_transaction = string;
 	}
 
-
-	/**
-	 * @return the accountBank
-	 */
 	public AccountBank getAccountBank() {
 		return accountBank;
 	}
 
 
-	/**
-	 * @param accountBank the accountBank to set
-	 */
 	public void setAccountBank(AccountBank accountBank) {
 		this.accountBank = accountBank;
 	}
 
 
-	/**
-	 * @return the is_account_bank
-	 */
 	public Boolean getIs_account_bank() {
 		return is_account_bank;
 	}
 
 
-	/**
-	 * @param is_account_bank the is_account_bank to set
-	 */
+
 	public void setIs_account_bank(Boolean is_account_bank) {
 		this.is_account_bank = is_account_bank;
 	}
 
-
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 
-	/**
-	 * @return the sender
-	 */
 	public User getEmitter() {
 		return emitter;
 	}
 
 
-	/**
-	 * @param sender the sender to set
-	 */
 	public void setEmitter(User emitter) {
 		this.emitter = emitter;
 	}
 
 
-	/**
-	 * @return the recipient
-	 */
 	public User getReceiver() {
 		return receiver;
 	}
 
 
-	/**
-	 * @param recipient the recipient to set
-	 */
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
 	}
 
 
-	/**
-	 * @return the balance
-	 */
+
 	public float getBalance() {
 		return balance;
 	}
 
 
-	/**
-	 * @param balance the balance to set
-	 */
 	public void setBalance(float balance) {
 		this.balance = balance;
 	}
 
-
-	/**
-	 * @return the statut_transaction
-	 */
 	public boolean isStatut_transaction() {
 		return statut_transaction;
 	}
 
-
-	/**
-	 * @param statut_transaction the statut_transaction to set
-	 */
 	public void setStatut_transaction(boolean statut_transaction) {
 		this.statut_transaction = statut_transaction;
 	}
 
-
-	/**
-	 * @return the date_transaction
-	 */
 	public LocalDateTime getDate_transaction() {
 		return date_transaction;
 	}
 
-
-	/**
-	 * @param localDate the date_transaction to set
-	 */
 	public void setDate_transaction(LocalDateTime localDate) {
 		this.date_transaction = localDate;
 	}
 
-
-	/**
-	 * @return the libelle_perso
-	 */
 	public String getLibelle_perso() {
 		return libelle_perso;
 	}
 
-
-	/**
-	 * @param libelle_perso the lieblle_perso to set
-	 */
 	public void setLibelle_perso(String libelle_perso) {
 		this.libelle_perso = libelle_perso;
 	}
-
-
-
 
 
 }

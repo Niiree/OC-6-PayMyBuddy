@@ -2,8 +2,6 @@ package com.paymybuddy.app.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,15 +12,11 @@ import org.springframework.stereotype.Service;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.UserRepository;
 
-
-
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-
-
 
 	public void saveUser(User user) {
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
@@ -67,10 +61,10 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
+	//Encode password
 	private PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();	
 	}
-	
 	
 
 }

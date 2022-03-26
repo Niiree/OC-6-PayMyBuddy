@@ -11,10 +11,6 @@ import com.paymybuddy.app.models.AccountBank;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.AccountBankRepository;
 
-/*TODO 
- * Logger
- * Commentaire
- * */
 
 @Service
 public class AccountBankService {
@@ -33,9 +29,9 @@ public class AccountBankService {
 
 
 	public AccountBank createUpdateAccountBank(AccountBank accountBank) {
-		User user = userService.getUserConnected(); //TODO Vérifier proprietaire du compte bank
-
+		User user = userService.getUserConnected(); 
 		AccountBank accountBankFind = accountBankRepository.findByIban(accountBank.getIban());
+
 		if(accountBankFind != null) {
 			accountBankFind.setAddress(accountBank.getAddress());
 			accountBankFind.setCity(accountBank.getCity());
@@ -55,16 +51,13 @@ public class AccountBankService {
 
 		if(accountBankFind.isPresent()) {
 			if(accountBankFind.get().getUser().getId() == user.getId()) {
-
-
 				accountBankFind.get().setStatutActive(false);
 				accountBankRepository.save(accountBankFind.get());
 			}else {
 				logger.error("User id != acount user id");
-
 			}
 		}else{
-			logger.info("Account not found");
+			logger.error("Account not found");
 		}
 	}
 
@@ -72,8 +65,5 @@ public class AccountBankService {
 		List<AccountBank> account = accountBankRepository.findAllByIdUser(id);
 		return account;
 	}
-	
-
-
 
 }

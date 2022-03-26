@@ -16,16 +16,24 @@
 	<div id="transfer-main-content" class="container">
 		<h2>Manage credit</h2>
 
-		<form th:action="@{/bankTransaction}" th:object="${createTransferForm}"method="post">
+		<form th:action="@{/bankTransaction}"
+			th:object="${createTransferForm}" method="post">
 
-			<p>Amount<input type="number" th:field="*{balance}"/></p>
-			
-			<span th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"th:errorclass="error" ></span>
-			
-			<p>Description <input type="text" th:field="*{libelle_perso}" /></p>
-			<label>Account Bank</label> <select class="browser-default "th:field="*{accountBank}">
-				<option th:each="bank : ${banks}" th:value="${bank.id}"th:text="${bank.name}"></option>
-			</select>			
+			<p>
+				Amount<input type="number" th:field="*{balance}" />
+			</p>
+
+			<span th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"
+				th:errorclass="error"></span>
+
+			<p>
+				Description <input type="text" th:field="*{libelle_perso}" />
+			</p>
+			<label>Account Bank</label> <select class="browser-default "
+				th:field="*{accountBank}">
+				<option th:each="bank : ${banks}" th:value="${bank.id}"
+					th:text="${bank.name}"></option>
+			</select>
 			<p>
 				<input type="submit" value="Submit" />
 			</p>

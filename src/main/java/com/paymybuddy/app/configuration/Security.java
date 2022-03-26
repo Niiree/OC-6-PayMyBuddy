@@ -23,61 +23,62 @@ import com.paymybuddy.app.services.CustomUserDetailsService;
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class Security extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
-    private DataSource dataSource;
-    
-    @Bean
-    public UserDetailsService userDetailsService() {
-       return new CustomUserDetailsService();
-    } 
-   
+	private DataSource dataSource;
+
+	@Bean
+	public UserDetailsService userDetailsService() {
+		return new CustomUserDetailsService();
+	} 
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-	return new BCryptPasswordEncoder();	
+		return new BCryptPasswordEncoder();	
 	}
-	
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
-        authProvider.setPasswordEncoder(passwordEncoder());
-     
-        return authProvider;
-    }
-    
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
-    
-    public boolean isAuthenticated() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || AnonymousAuthenticationToken.class.
-            isAssignableFrom(authentication.getClass())) {
-            return false;
-        }
-        return authentication.isAuthenticated();
-    }
- 
-    
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-        	.antMatchers("/materialize.css","/main.css","/resources/static/**","/signup","/process_register","signup_success","/static/**","/images/**","materialize.css").permitAll()
-            .anyRequest().authenticated()     
-            .and()
-            .formLogin()
-            	.loginPage("/login")
-            	.loginProcessingUrl("/login")
-            	.defaultSuccessUrl("/")
-            	.permitAll()
-            .and()
-            .logout()
-            .clearAuthentication(true)
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/")
-            .deleteCookies().permitAll();
-    }
-    
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+
+		return authProvider;
+	}
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authenticationProvider());
+	}
+
+	//vérification si l'utilisateur est auth
+	public boolean isAuthenticated() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || AnonymousAuthenticationToken.class.
+				isAssignableFrom(authentication.getClass())) {
+			return false;
+		}
+		return authentication.isAuthenticated();
+	}
+
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+		.antMatchers("/materialize.css","/main.css","/resources/static/**","/signup","/process_register","signup_success","/static/**","/images/**","materialize.css").permitAll()//Exclusion des fichiers pour l'affichage + 
+		.anyRequest().authenticated()     
+		.and()
+		.formLogin()
+		.loginPage("/login")
+		.loginProcessingUrl("/login")
+		.defaultSuccessUrl("/")
+		.permitAll()
+		.and()
+		.logout()
+		.clearAuthentication(true)
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/")
+		.deleteCookies().permitAll();
+	}
+
 }

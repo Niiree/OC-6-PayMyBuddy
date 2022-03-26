@@ -17,9 +17,16 @@
 	<div id="transfer-main-content" class="container">
 		<h2>Add new connection</h2>
 
-		<form th:action="@{/addFriend}" th:object="${createFriendForm}" method="post">
-			<p>Email <input type="text" th:field="*{email}" /></p>
-			<p><input type="submit" class="waves-effect waves-light btn white-text green darken-1" value="Send invitation" /></p>
+		<form th:action="@{/addFriend}" th:object="${createFriendForm}"
+			method="post">
+			<p>
+				Email <input type="text" th:field="*{email}" />
+			</p>
+			<p>
+				<input type="submit"
+					class="waves-effect waves-light btn white-text green darken-1"
+					value="Send invitation" />
+			</p>
 		</form>
 	</div>
 

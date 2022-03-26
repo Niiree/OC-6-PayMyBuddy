@@ -18,14 +18,16 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 	//Return une transaction : ID Transaction
 	@Query(value = "SELECT * FROM transaction u WHERE u.id_transaction = ?1", nativeQuery = true)
 	public List<Transaction> findByid_Transaction(String str);
-
+	
+	//Return les transactions associer à un utilisateur. 
 	@Query(value = "SELECT * FROM transaction u WHERE u.emitter_id = ?1 or u.receiver_id = ?1", nativeQuery = true)
 	public List<Transaction> findAllTransactionByIdUser(int id);
 	
+	//Return les transactions associer à un utilisateur sans lien avec son account bank.
 	@Query(value = "SELECT * FROM transaction u WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = false  ",countQuery= "SELECT count(*) FROM transaction u  WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = false ", nativeQuery = true)
 	public Page<Transaction> pageableFindAllTransactionByIdUser(int idUser,Pageable pageable);
 	
-	
+	//Return les transactions associer à un utilisateur en lien avec son account bank.
 	@Query(value = "SELECT * FROM transaction u WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = true  ",countQuery= "SELECT count(*) FROM transaction u  WHERE ( u.emitter_id = ?1 or u.receiver_id = ?1) AND u.is_account_bank = true ", nativeQuery = true)
 	public Page<Transaction> pageableFindAllBankTransactionByIdUser(int idUser,Pageable pageable);
 	

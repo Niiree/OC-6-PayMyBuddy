@@ -36,12 +36,11 @@ public class AccountBank {
 	private int zip;
 
 	@Column(name ="statut_active")
-	private boolean statut_active; // A refactor sous statut_isActive
+	private boolean statut_active;
 
 	public int getId() {
 		return id;	
 	}
-
 
 	public String getName() {
 		return name;
@@ -56,56 +55,39 @@ public class AccountBank {
 		this.iban = iban;
 	}
 
-	/**
-	 * @return the address
-	 */
 	public String getAddress() {
 		return address;
 	}
 
 
-	/**
-	 * @param address the address to set
-	 */
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
 
-	/**
-	 * @return the city
-	 */
+
 	public String getCity() {
 		return city;
 	}
 
 
-	/**
-	 * @param city the city to set
-	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 
 
-	/**
-	 * @return the zip
-	 */
 	public int getZip() {
 		return zip;
 	}
 
 
-	/**
-	 * @param zip the zip to set
-	 */
+
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
 
-	/**
-	 * @return return boolean statut
-	 */
+
 	public boolean getStatutActive() {
 		return statut_active;
 	}

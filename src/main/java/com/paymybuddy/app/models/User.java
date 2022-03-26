@@ -23,7 +23,7 @@ public class User {
 	@Column(name="id")
 	private int id;
 
-	
+
 	@NotBlank
 	@Size(min = 3, message ="The first name must contain at least 3 characters")
 	@Column(name="firstname")
@@ -51,33 +51,20 @@ public class User {
 	private String Password;
 
 	@Column(name="statut_Active")
-	private Boolean statut_active; //TODO A REFACTOR statut_IsActive
+	private Boolean statut_active; 
+	//Jointure d'identifiant unique)
+	@JoinTable(name="connections", joinColumns = {
+			@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+	}, inverseJoinColumns = {
+			@JoinColumn(name = "friend_id", referencedColumnName = "id", nullable = false)
+	})
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<User> friendlist;
 
-
-	
-    @JoinTable(name="connections", joinColumns = {
-            @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    }, inverseJoinColumns = {
-            @JoinColumn(name = "friend_id", referencedColumnName = "id", nullable = false)
-    })
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<User> friendlist;
-
-
-
-
-
-	/**
-	 * @return the listFriend
-	 */
 	public List<User> getListFriend() {
 		return friendlist;
 	}
 
-
-	/**
-	 * @param listFriend the listFriend to set
-	 */
 	public void setListFriend(List<User> listFriend) {
 		this.friendlist = listFriend;
 	}
@@ -137,17 +124,10 @@ public class User {
 	}
 
 
-	/**
-	 * @return the statut_active
-	 */
 	public Boolean getStatut_active() {
 		return statut_active;
 	}
 
-
-	/**
-	 * @param statut_active the statut_active to set
-	 */
 	public void setStatut_active(Boolean statut_active) {
 		this.statut_active = statut_active;
 	}	

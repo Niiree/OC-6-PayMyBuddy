@@ -64,30 +64,34 @@
 			</tr>
 			<tr data-th-each="transaction : ${ transactions }">
 				<td data-th-text="${ transaction.id_transaction }"></td>
-				<td data-th-text="${#temporals.day(transaction.date_transaction)}+'/'+${#temporals.month(transaction.date_transaction)} +'/'+${#temporals.year(transaction.date_transaction)} "></td>
-				
+				<td
+					data-th-text="${#temporals.day(transaction.date_transaction)}+'/'+${#temporals.month(transaction.date_transaction)} +'/'+${#temporals.year(transaction.date_transaction)} "></td>
 
-				<td data-th-text="${ transaction.emitter.firstName} +' '+ ${ transaction.emitter.lastName }"></td>
-				<td data-th-text="${ transaction.receiver.firstName} +' '+ ${ transaction.receiver.lastName }"></td>
+
+				<td
+					data-th-text="${ transaction.emitter.firstName} +' '+ ${ transaction.emitter.lastName }"></td>
+				<td
+					data-th-text="${ transaction.receiver.firstName} +' '+ ${ transaction.receiver.lastName }"></td>
 
 				<td data-th-text="${ transaction.libelle_perso }"></td>
 
 				<td data-th-text="${ transaction.balance}+'€ '"></td>
-			
+
 			</tr>
 		</table>
-<div class="pagination" th:if="${transactions.totalPages > 0}">
-<ul>
-    <li  th:each="pageNumber : ${pageNumbers}" class ="waves-effect" th:class="${pageNumber==transactions.number + 1} ? active" >
-    	<a th:href="@{/transactions(size=${transactions.size}, page=${pageNumber})}"th:text=${pageNumber}></a>
-    </li>
-</ul>
-</div>
+		<div class="pagination" th:if="${transactions.totalPages > 0}">
+			<ul>
+				<li th:each="pageNumber : ${pageNumbers}" class="waves-effect"
+					th:class="${pageNumber==transactions.number + 1} ? active"><a
+					th:href="@{/transactions(size=${transactions.size}, page=${pageNumber})}"
+					th:text=${pageNumber}></a></li>
+			</ul>
+		</div>
 
 
-  
+
 	</div>
-	
-	
+
+
 </body>
 </html>

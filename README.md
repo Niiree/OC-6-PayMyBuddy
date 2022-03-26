@@ -38,7 +38,7 @@ For this, please run the sql commands present in the `Data.sql` file under the `
 
 Finally, you will be ready to import the code into an IDE of your choice and run the App.java to launch the application.
 
-
-
+### Diagramme de classe
+![alt tag](https://github.com/nicolas-le-stunff/OC-6-PayMyBuddy/blob/develop/src/main/resources/LeStunff_Nicolas_4_uml_032022.png)
 ### Modèle physique de données
 ![alt tag](https://github.com/nicolas-le-stunff/OC-6-PayMyBuddy/blob/develop/src/main/resources/LeStunff_Nicolas_4_mpd_032022.png)

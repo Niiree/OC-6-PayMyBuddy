@@ -1,68 +1,72 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Sign up</title>
-<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}" href="../static/materialize.css"/>
-<link rel="stylesheet" type="text/css" th:href="@{/main.css}" href="../static/main.css"/>
+<meta charset="ISO-8859-1">
+<title>Sign up</title>
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
+	href="../static/materialize.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+	href="../static/main.css" />
 
 </head>
 <header th:replace="fragments/app-fragments :: header"></header>
 <div th:replace="fragments/app-fragments :: navbar"></div>
 <body>
-        
-   
-    <div sec:authorize="isAuthenticated()">
-        Text visible only to authenticated users.
-    </div>
-            
-    <div class="container text-center">
-        <div>
-            <h1>User Registration</h1>
-        </div>
-        <form th:action="@{/process_register}" th:object="${user}"
-            method="post" style="max-width: 600px; margin: 0 auto;">
-        <div class="m-3">
-            <div class="form-group row">
-                <label class="col-4 col-form-label">E-mail: </label>
-                <div class="col-8">
-                    <input type="email" th:field="*{email}" class="form-control" required />
-                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"th:errorclass="error" ></span>
-                </div>
-            </div>
-             
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Password: </label>
-                <div class="col-8">
-                    <input type="password" th:field="*{password}" class="form-control" required minlength="6" maxlength="10"/>
-                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"th:errorclass="error" ></span>
-                </div>  
-            </div>
-             
-            <div class="form-group row">
-                <label class="col-4 col-form-label">First Name: </label>
-                <div class="col-8">
-                    <input type="text" th:field="*{firstName}" class="form-control"required minlength="2" maxlength="20"/>
-                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"th:errorclass="error" ></span> 
-                </div>
-            	               
-            </div>
-             
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Last Name: </label>
-                <div class="col-8">
-                    <input type="text" th:field="*{lastName}" class="form-control" required minlength="2" maxlength="20" />
-                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"th:errorclass="error" ></span>
-                </div>
-            </div>
-             
-            <div>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </div>
-        </div>
-        </form>
-    </div>
+
+	<div class="container text-center">
+		<div>
+			<h1>User Registration</h1>
+		</div>
+		<form th:action="@{/process_register}" th:object="${user}"
+			method="post" style="max-width: 600px; margin: 0 auto;">
+			<div class="m-3">
+				<div class="form-group row">
+					<label class="col-4 col-form-label">E-mail: </label>
+					<div class="col-8">
+						<input type="email" th:field="*{email}" class="form-control"
+							required /> <span th:if="${#fields.hasErrors('email')}"
+							th:errors="*{email}" th:errorclass="error"></span>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Password: </label>
+					<div class="col-8">
+						<input type="password" th:field="*{password}" class="form-control"
+							required minlength="6" maxlength="10" /> <span
+							th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+							th:errorclass="error"></span>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-4 col-form-label">First Name: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{firstName}" class="form-control"
+							required minlength="2" maxlength="20" /> <span
+							th:if="${#fields.hasErrors('firstName')}"
+							th:errors="*{firstName}" th:errorclass="error"></span>
+					</div>
+
+				</div>
+
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Last Name: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{lastName}" class="form-control"
+							required minlength="2" maxlength="20" /> <span
+							th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+							th:errorclass="error"></span>
+					</div>
+				</div>
+
+				<div>
+					<button type="submit" class="btn btn-primary">Sign Up</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
