@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Create transfer</title>
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+	href="../../static/main.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
+	href="../../static/materialize.css" />
+<th:block id="transfer-static-resources">
+</th:block>
+</head>
+<body>
+	<header th:replace="fragments/app-fragments :: header"></header>
+	<nav th:replace="fragments/app-fragments :: navbar"></nav>
+
+	<div id="transfer-main-content" class="container">
+		<h2>Manage credit</h2>
+
+		<form th:action="@{/bankTransaction}"
+			th:object="${createTransferForm}" method="post">
+
+			<p>
+				Amount<input type="number" th:field="*{balance}" />
+			</p>
+
+			<span th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"
+				th:errorclass="error"></span>
+
+			<p>
+				Description <input type="text" th:field="*{libelle_perso}" />
+			</p>
+			<label>Account Bank</label> <select class="browser-default "
+				th:field="*{accountBank}">
+				<option th:each="bank : ${banks}" th:value="${bank.id}"
+					th:text="${bank.name}"></option>
+			</select>
+			<p>
+				<input type="submit" value="Submit" />
+			</p>
+		</form>
+	</div>
+</body>
+</html>

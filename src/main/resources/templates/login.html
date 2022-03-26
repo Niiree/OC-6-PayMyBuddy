@@ -1,0 +1,65 @@
+<html lang="fr">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+	href="../../static/main.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
+	href="../../static/materialize.css" />
+<title>PayMyBuddy - login</title>
+</head>
+<body>
+	<header th:replace="fragments/app-fragments :: header"></header>
+	<div th:replace="fragments/app-fragments :: navbar"></div>
+
+	<div class="col s12"></div>
+	<div class="col s12 m4 l2"></div>
+
+	<div class="container center col s12 m4 l8">
+
+		<form th:action="@{/login}" method="post">
+			<div id="loginForm">
+				<a class="ard-panel white-text green darken-1"
+					style="padding: 10px;">Pay my buddy</a>
+				<div class="input-group offset-md-8	pt-5">
+					<span class="input-group-addon pt-2 pr-2"><i
+						class="fas fa-envelope-square"></i></span> <input id="email" type="text"
+						class="form-control" name="username" placeholder="Email">
+				</div>
+				<div class="input-group offset-md-8	pt-3">
+					<span class="input-group-addon pt-2 pr-2"><i
+						class="fas fa-asterisk"></i></span> <input id="password" type="password"
+						class="form-control" name="password" placeholder="password">
+				</div>
+				<p>
+					<label> <input type="checkbox" /> <span>Remember me
+					</span>
+					</label>
+				</p>
+				<div class="form-group pt-4 offset-md-5">
+
+					<input type="submit"
+						class="btn btn-primary btn-lg text-center white-text green darken-1"
+						id="submit" name="_submit" value="Login" />
+				</div>
+			</div>
+
+		</form>
+
+	</div>
+
+
+	<div class="helloText offset-md-4">
+		<p>
+			Do not have an account? <a th:href="@{/signup}">Create your buddy
+				account here</a>.
+		<p>
+	</div>
+	<div class="col s12 m4 l2"></div>
+
+
+
+</body>
+</html>

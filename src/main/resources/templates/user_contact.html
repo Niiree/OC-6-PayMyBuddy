@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1">
+<title>Friend list</title>
+<link rel="stylesheet" type="text/css" th:href="@{/main.css}"
+	href="../../static/main.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/materialize.css}"
+	href="../../static/materialize.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+</head>
+</head>
+<body>
+	<header th:replace="fragments/app-fragments :: header"></header>
+	<div th:replace="fragments/app-fragments :: navbar"></div>
+	<div class="container text-center">
+
+		<div>
+			<h1>friend's list</h1>
+		</div>
+
+		<div>
+			<a th:href="@{/addFriend}"
+				class="waves-effect waves-light btn white-text #43a047 green darken-1">Add
+				new friend</a>
+			<table class="table table-striped table-bordered">
+				<thead class="card-panel #43a047 white-text green darken-1 ">
+					<tr>
+
+						<th>E-mail</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user: ${listUsers}">
+
+						<td th:text="${user.email}">E-mail</td>
+						<td th:text="${user.firstName}">First Name</td>
+						<td th:text="${user.lastName}">Last Name</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

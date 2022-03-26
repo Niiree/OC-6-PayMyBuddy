@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  margin-top: -12px;
+}
+
+.no-shadows {
+    box-shadow: none;
+}
+
+#logo{
+	border-radius: 5px;
+	
+}
+
+
+#paymybuddy_Header{
+	margin: 0px;
+}
+
+#navbar{
+	box-shadow: none ;
+}
+
+#loginForm{
+	display:inline-block;
+	widht:400px;	
+	margin-top:100px;
+	border: solid grey;
+	border-radius:15px;
+	padding: 10px 130px
+}
+
+#loginForm a{
+	margin-bottom:35px;
+}
+
+#loginForm input{
+	margin: 10px 0px ;
+	
+}
+
+
+.error {
+	color :red;
+}
+
+}

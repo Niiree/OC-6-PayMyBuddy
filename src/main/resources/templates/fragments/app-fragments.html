@@ -1,0 +1,31 @@
+
+<header th:fragment="header">
+	<div style="height: 50px border">
+		<div id="paymybuddy_Header"
+			class="card-panel blue-grey darken-3 center-align no-shadow">
+			<span class="white-text">pay my buddy</span>
+		</div>
+	</div>
+</header>
+
+
+
+<nav th:fragment="navbar" id="navbar">
+
+	<div class="nav-wrapper white z-depth-0">
+		<div class="col">
+			<a id="logo" th:href="@{/}" class="brand-logo green">Pay My Buddy</a>
+		</div>
+		<!-- Links -->
+		<ul id="nav-mobile" class="right hide-on-med-and-down white ">
+			<li sec:authorize="isAuthenticated()" class="navbar-nav"><a th:href="@{/}" class="black-text text-darken-2">Home</a></li>
+			<li sec:authorize="isAuthenticated()" class="navbar-nav"><a th:href="@{/transactions}" class="black-text text-darken-2">Transfer</a></li>
+			<li sec:authorize="isAuthenticated()" class="navbar-nav"><a th:href="@{/profil}"class="black-text text-darken-2">Profil</a></li>
+			<li sec:authorize="isAuthenticated()" class="navbar-nav"><a th:href="@{/contact}" class="black-text text-darken-2">Contact</a></li>
+			<li sec:authorize="isAuthenticated()" class="navbar-nav"><a th:href="@{/logout}" class="black-text text-darken-2">Log off</a></li>
+			<li sec:authorize="isAnonymous()" class="navbar-nav"><a th:href="@{/login}"class="black-text text-darken-2">Log in</a></li>
+			<li sec:authorize="isAnonymous()" class="navbar-nav"><a th:href="@{/signup}"class="black-text text-darken-2">Register</a></li>
+		</ul>
+	</div>
+</nav>
+
