@@ -3,7 +3,7 @@ package com.paymybuddy.app.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,8 @@ public class AccountBankService {
 	@Autowired
 	private UserService userService;
 
-	private Logger logger;
+	
+	private static org.slf4j.Logger logger = LoggerFactory.getLogger(AccountBankService.class);
 
 	public Iterable<AccountBank> findAll(){
 		return accountBankRepository.findAll();

@@ -12,16 +12,23 @@ import org.springframework.stereotype.Service;
 import com.paymybuddy.app.models.User;
 import com.paymybuddy.app.repository.UserRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	public void saveUser(User user) {
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
 		user.setStatut_active(true);
 		user.setDate_creation(LocalDateTime.now());
+		logger.info("new user" + user.getFirstName() +" "+ user.getLastName());
 		userRepository.save(user);
 	}
 

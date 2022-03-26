@@ -52,27 +52,17 @@
 			<tr>
 				<th>id transaction</th>
 				<th>Date</th>
-				<th>Emitter</th>
-				<th>Receiver</th>
+				<th>Bank</th>
 				<th>Description</th>
 				<th>Amount</th>
 
 			</tr>
 			<tr data-th-each="transaction : ${ transactions }">
 				<td data-th-text="${ transaction.id_transaction }"></td>
-				<td
-					data-th-text="${#temporals.day(transaction.date_transaction)}+'/'+${#temporals.month(transaction.date_transaction)} +'/'+${#temporals.year(transaction.date_transaction)} "></td>
-
+				<td data-th-text="${#temporals.day(transaction.date_transaction)}+'/'+${#temporals.month(transaction.date_transaction)} +'/'+${#temporals.year(transaction.date_transaction)} "></td>
 				<td data-th-text="${ transaction.accountBank.name}"></td>
-				<td
-					data-th-text="${ transaction.emitter.firstName} +' '+ ${transaction.emitter.lastName}">Bank-</td>
-
-
 				<td data-th-text="${ transaction.libelle_perso }"></td>
-
 				<td data-th-text="${ transaction.balance}+'€ '"></td>
-				<td th:if="${transaction.emitter ==  idUser}"
-					data-th-text="${ transaction.taxe}+'€ '"></td>
 
 			</tr>
 		</table>

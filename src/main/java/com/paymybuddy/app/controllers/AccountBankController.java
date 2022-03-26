@@ -44,13 +44,13 @@ public class AccountBankController {
 	@PostMapping("/accountBank")
 	public String submissionResult(@ModelAttribute("personForm") AccountBank accountBank,HttpServletRequest request) {
 		accountBankService.createUpdateAccountBank(accountBank);
-		return "redirect:/";
+		return "redirect:/profil";
 	}
 
 	@GetMapping("/delete_accountBank/{id}")
 	public String deleteAccountBank(@PathVariable int id) {
 		accountBankService.disableAccountBank(id);
-		return "/";
+		return "redirect:/profil";
 	}
 
 

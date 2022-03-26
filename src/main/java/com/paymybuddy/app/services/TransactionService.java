@@ -45,7 +45,8 @@ public class TransactionService {
 		if(optional.isPresent()) {
 			return optional.get();
 		}else {
-			throw new RuntimeException("Transaction not found for id "+id);
+			logger.error("Transaction not found for id "+id);
+			throw new RuntimeException();
 		}
 	}
 
@@ -90,7 +91,7 @@ public class TransactionService {
 	public Transaction createTransactionBank(Transaction transaction) throws Exception {
 		User user = userService.getUserConnected();
 
-		if(user.getBalance() + transaction.getBalance() > 0) {
+		if(user.getBalance() + transaction.getBalance() >= 0) {
 			transaction.setId_transaction(hashTransaction());
 			transaction.setDate_transaction(LocalDateTime.now());
 			transaction.setEmitter(user);
@@ -100,6 +101,7 @@ public class TransactionService {
 			user.setBalance(user.getBalance() + transaction.getBalance());
 			return transactionRepository.save(transaction);
 		}else {
+
 			return null;
 		}
 
