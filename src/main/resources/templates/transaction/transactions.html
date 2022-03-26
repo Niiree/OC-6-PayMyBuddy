@@ -61,7 +61,6 @@
 				<th>Receiver</th>
 				<th>Description</th>
 				<th>Amount</th>
-				<th>Taxe</th>
 			</tr>
 			<tr data-th-each="transaction : ${ transactions }">
 				<td data-th-text="${ transaction.id_transaction }"></td>
@@ -74,7 +73,6 @@
 				<td data-th-text="${ transaction.libelle_perso }"></td>
 
 				<td data-th-text="${ transaction.balance}+'€ '"></td>
-				<td data-th-text="${ transaction.taxe}+'€ '"></td>
 			
 			</tr>
 		</table>

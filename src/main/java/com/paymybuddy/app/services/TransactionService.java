@@ -85,8 +85,7 @@ public class TransactionService {
 					transaction.setStatut_transaction(true);
 					transaction.setId_transaction(hashTransaction());
 					transaction.setTaxe(taxeAmount);
-					transactionRepository.save(transaction);
-						
+					transactionRepository.save(transaction);	
 					}
 				}
 			}
